@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gauss &amp; Geometria — Dossiê Tático | Sr. Evandson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased">
+
+    <header class="top-bar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <a href="index.html" class="back-link"><span class="text-lg">&larr;</span> Voltar ao Dossiê</a>
+                <div class="text-right">
+                    <h1 class="text-sm font-bold text-white">Gauss &amp; Geometria</h1>
+                    <p class="text-xs text-slate-500">Esfera, Cilindro, Plano &amp; Casca Condutora</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- LEI DE GAUSS — A REGRA DE OURO        -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-blue-700 to-indigo-700" data-chapter="&Phi;">
+                <p class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-1">A Regra de Ouro</p>
+                <h2 class="text-2xl font-black">Lei de Gauss &mdash; Passo-a-Passo de Resolução</h2>
+                <p class="text-blue-100 text-sm mt-2">Esta é a Q1 <strong>garantida</strong> da prova. Memorize este fluxograma.</p>
+            </div>
+
+            <!-- Hero formula -->
+            <div class="formula-card formula-hero text-center">
+                <p class="text-indigo-200 text-xs uppercase tracking-wider mb-2">A Equação Central</p>
+                <div class="formula-display text-2xl">&oint; E&#8407; &middot; dA&#8407; = q<sub>env</sub> / &epsilon;<sub>0</sub></div>
+                <p class="text-indigo-100 text-sm mt-3">Lado esquerdo = <strong>Geometria</strong> (área da superfície). Lado direito = <strong>Carga envolvida</strong> (integral se &rho; variar).</p>
+            </div>
+
+            <!-- Flowchart Steps -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                <div class="formula-card text-center border-t-4 border-indigo-500">
+                    <div class="text-2xl mb-2">1️⃣</div>
+                    <h4 class="font-bold text-sm text-indigo-900 mb-1">Identifique a Simetria</h4>
+                    <p class="text-xs text-slate-600">Esférica? Cilíndrica? Planar?</p>
+                </div>
+                <div class="formula-card text-center border-t-4 border-blue-500">
+                    <div class="text-2xl mb-2">2️⃣</div>
+                    <h4 class="font-bold text-sm text-blue-900 mb-1">Escolha a Superfície</h4>
+                    <p class="text-xs text-slate-600">Esfera, Cilindro, ou Travesseiro Gaussiano</p>
+                </div>
+                <div class="formula-card text-center border-t-4 border-cyan-500">
+                    <div class="text-2xl mb-2">3️⃣</div>
+                    <h4 class="font-bold text-sm text-cyan-900 mb-1">Calcule E&middot;A</h4>
+                    <p class="text-xs text-slate-600">E sai da integral pois é constante na superfície</p>
+                </div>
+                <div class="formula-card text-center border-t-4 border-emerald-500">
+                    <div class="text-2xl mb-2">4️⃣</div>
+                    <h4 class="font-bold text-sm text-emerald-900 mb-1">Calcule q<sub>env</sub></h4>
+                    <p class="text-xs text-slate-600">&rho; uniforme? q = &rho;&middot;V. Não uniforme? Integre!</p>
+                </div>
+                <div class="formula-card text-center border-t-4 border-amber-500">
+                    <div class="text-2xl mb-2">5️⃣</div>
+                    <h4 class="font-bold text-sm text-amber-900 mb-1">Isole E</h4>
+                    <p class="text-xs text-slate-600">E = q<sub>env</sub> / (&epsilon;<sub>0</sub> &middot; A)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- ESFERA                                -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-blue-500 to-cyan-500" data-chapter="&#9679;">
+                <p class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-1">Geometria #1</p>
+                <h2 class="text-2xl font-black">Esfera Carregada (&rho; Uniforme)</h2>
+                <p class="text-blue-100 text-sm mt-2">Caiu em <strong>5 de 5 provas</strong>. É a Q1 mais provável. Domine as duas regiões: dentro e fora.</p>
+            </div>
+
+            <div class="flex justify-center">
+                <img src="img/gauss_esfera_regioes.png" alt="Esfera carregada: campo interno vs externo" class="diagram-img w-full max-w-2xl">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- r < R -->
+                <div class="formula-card border-l-4 border-blue-500">
+                    <div class="bg-blue-50 rounded-lg p-3 border border-blue-200 mb-3">
+                        <p class="text-xs font-bold uppercase text-blue-600">Região Interior (r &lt; R)</p>
+                        <p class="text-xs text-blue-800">A superfície gaussiana está <strong>dentro</strong> da esfera.</p>
+                    </div>
+                    <p class="text-xs font-bold text-slate-500 mb-1">Lado Esquerdo (Geometria):</p>
+                    <div class="formula-display text-sm text-slate-800">E &middot; (4&pi;r&sup2;)</div>
+                    <p class="text-xs font-bold text-slate-500 mb-1 mt-3">Lado Direito (Carga Envolvida):</p>
+                    <div class="formula-display text-sm text-slate-800">&rho; &middot; (4/3)&pi;r&sup3; / &epsilon;<sub>0</sub></div>
+                    <p class="text-xs font-bold text-blue-600 mb-1 mt-3">Resultado Final:</p>
+                    <div class="formula-display text-blue-900 text-lg">E = (&rho; &middot; r) / (3&epsilon;<sub>0</sub>)</div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
+                        <p class="text-xs text-blue-800"><strong>📈 Comportamento:</strong> E cresce <strong>linearmente</strong> com r. No centro (r=0), E = 0.</p>
+                    </div>
+                </div>
+
+                <!-- r > R -->
+                <div class="formula-card border-l-4 border-indigo-500">
+                    <div class="bg-indigo-50 rounded-lg p-3 border border-indigo-200 mb-3">
+                        <p class="text-xs font-bold uppercase text-indigo-600">Região Exterior (r &gt; R)</p>
+                        <p class="text-xs text-indigo-800">A superfície gaussiana está <strong>fora</strong> da esfera.</p>
+                    </div>
+                    <p class="text-xs font-bold text-slate-500 mb-1">Lado Esquerdo (Geometria):</p>
+                    <div class="formula-display text-sm text-slate-800">E &middot; (4&pi;r&sup2;)</div>
+                    <p class="text-xs font-bold text-slate-500 mb-1 mt-3">Lado Direito (Carga Total):</p>
+                    <div class="formula-display text-sm text-slate-800">Q<sub>total</sub> / &epsilon;<sub>0</sub></div>
+                    <p class="text-xs font-bold text-indigo-600 mb-1 mt-3">Resultado Final:</p>
+                    <div class="formula-display text-indigo-900 text-lg">E = Q / (4&pi;&epsilon;<sub>0</sub> r&sup2;)</div>
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-3 mt-3">
+                        <p class="text-xs text-indigo-800"><strong>📉 Comportamento:</strong> Parece uma <strong>carga pontual</strong>! E cai com 1/r&sup2;. Toda a carga se comporta como se estivesse concentrada no centro.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Esfera Não Uniforme -->
+            <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #1e3a5f, #2563eb);">
+                <h3 class="text-lg font-black text-white mb-3">⭐ Caso Especial: &rho; Não Uniforme (&rho; = ar)</h3>
+                <p class="text-blue-100 text-sm mb-4">Quando a densidade <strong>varia com r</strong>, não pode usar q = &rho;&middot;V. Tem de integrar!</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-white/10 rounded-xl p-4 border border-white/20">
+                        <p class="text-xs text-blue-200 uppercase mb-1">Passo 1: Elemento de Volume</p>
+                        <p class="font-mono text-white font-bold">dV = 4&pi;r&sup2; dr</p>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-4 border border-white/20">
+                        <p class="text-xs text-blue-200 uppercase mb-1">Passo 2: Elemento de Carga</p>
+                        <p class="font-mono text-white font-bold">dq = &rho;(r)&middot;dV = ar&middot;4&pi;r&sup2;dr</p>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-4 border border-white/20">
+                        <p class="text-xs text-blue-200 uppercase mb-1">Passo 3: Integrar</p>
+                        <p class="font-mono text-white font-bold">q<sub>env</sub> = &int;<sub>0</sub><sup>r</sup> 4&pi;a&middot;r'&sup3; dr' = &pi;ar<sup>4</sup></p>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <p class="text-blue-200 text-xs uppercase mb-1">Resultado Final (r &lt; R):</p>
+                    <div class="formula-display text-xl">E = (a&middot;r&sup2;) / (4&epsilon;<sub>0</sub>)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- CILINDRO                              -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-emerald-500 to-green-600" data-chapter="&#9646;">
+                <p class="text-xs font-bold uppercase tracking-widest text-emerald-200 mb-1">Geometria #2</p>
+                <h2 class="text-2xl font-black">Cilindro Carregado</h2>
+                <p class="text-emerald-100 text-sm mt-2">Caiu em 2023.2 (Q1). A superfície gaussiana é um <strong>cilindro concêntrico</strong>. Só a lateral contribui com fluxo!</p>
+            </div>
+
+            <div class="flex justify-center">
+                <img src="img/gauss_cilindro.png" alt="Superfície gaussiana cilíndrica com campo radial" class="diagram-img w-full max-w-2xl">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="formula-card border-l-4 border-emerald-500">
+                    <div class="bg-emerald-50 rounded-lg p-3 border border-emerald-200 mb-3">
+                        <p class="text-xs font-bold uppercase text-emerald-600">Interior (r &lt; R) — &rho; Uniforme</p>
+                    </div>
+                    <p class="text-xs font-bold text-slate-500 mb-1">Fluxo pela lateral:</p>
+                    <div class="formula-display text-sm text-slate-800">E &middot; (2&pi;r&middot;h)</div>
+                    <p class="text-xs font-bold text-slate-500 mb-1 mt-3">Carga envolvida:</p>
+                    <div class="formula-display text-sm text-slate-800">&rho; &middot; &pi;r&sup2;h / &epsilon;<sub>0</sub></div>
+                    <p class="text-xs font-bold text-emerald-600 mb-1 mt-3">Resultado:</p>
+                    <div class="formula-display text-emerald-900 text-lg">E = (&rho; &middot; r) / (2&epsilon;<sub>0</sub>)</div>
+                    <p class="text-xs text-slate-600 text-center mt-2">Cresce linearmente com r (tal como a esfera).</p>
+                </div>
+
+                <div class="formula-card border-l-4 border-green-500">
+                    <div class="bg-green-50 rounded-lg p-3 border border-green-200 mb-3">
+                        <p class="text-xs font-bold uppercase text-green-600">Exterior (r &gt; R)</p>
+                    </div>
+                    <p class="text-xs font-bold text-slate-500 mb-1">Fluxo pela lateral:</p>
+                    <div class="formula-display text-sm text-slate-800">E &middot; (2&pi;r&middot;h)</div>
+                    <p class="text-xs font-bold text-slate-500 mb-1 mt-3">Carga total (toda a seção):</p>
+                    <div class="formula-display text-sm text-slate-800">&rho; &middot; &pi;R&sup2;h / &epsilon;<sub>0</sub></div>
+                    <p class="text-xs font-bold text-green-600 mb-1 mt-3">Resultado:</p>
+                    <div class="formula-display text-green-900 text-lg">E = (&rho; R&sup2;) / (2&epsilon;<sub>0</sub> r)</div>
+                    <p class="text-xs text-slate-600 text-center mt-2">Cai com 1/r (e não 1/r&sup2; como na esfera!).</p>
+                </div>
+            </div>
+
+            <div class="formula-card bg-amber-50 border-amber-300">
+                <p class="text-sm text-amber-900"><strong>⚠️ Porque as tampas não contribuem?</strong> Nas tampas do cilindro gaussiano, o campo E&#8407; é <strong>perpendicular</strong> ao vetor dA&#8407; (que aponta para fora da tampa). Logo E&#8407;&middot;dA&#8407; = 0 nas tampas. Só conta a <strong>lateral</strong>!</p>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- PLANO INFINITO                        -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-sky-500 to-blue-500" data-chapter="&#9632;">
+                <p class="text-xs font-bold uppercase tracking-widest text-sky-200 mb-1">Geometria #3</p>
+                <h2 class="text-2xl font-black">Plano Infinito Carregado</h2>
+                <p class="text-sky-100 text-sm mt-2">A superfície gaussiana é um <strong>"travesseiro"</strong> (pillbox cilíndrica) que atravessa o plano.</p>
+            </div>
+
+            <div class="flex justify-center">
+                <img src="img/gauss_plano.png" alt="Superfície gaussiana pillbox no plano infinito" class="diagram-img w-full max-w-lg">
+            </div>
+
+            <div class="formula-card">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div>
+                        <p class="text-xs font-bold text-sky-600 uppercase mb-1">O campo sai pelos dois lados:</p>
+                        <div class="formula-display text-sm text-slate-800">2 &middot; E &middot; A</div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-sky-600 uppercase mb-1">Carga dentro da pillbox:</p>
+                        <div class="formula-display text-sm text-slate-800">&sigma; &middot; A / &epsilon;<sub>0</sub></div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-sky-600 uppercase mb-1">Resultado:</p>
+                        <div class="formula-display text-sky-900 text-xl">E = &sigma; / (2&epsilon;<sub>0</sub>)</div>
+                    </div>
+                </div>
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-3 mt-4">
+                    <p class="text-xs text-sky-800"><strong>🤯 Curioso:</strong> O campo <strong>não depende da distância r</strong>! Não importa quão longe você está do plano, o campo é sempre o mesmo. Isso é porque o plano é infinito.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- CASCA CONDUTORA                       -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-slate-600 to-zinc-700" data-chapter="&#9711;">
+                <p class="text-xs font-bold uppercase tracking-widest text-slate-300 mb-1">Geometria #4</p>
+                <h2 class="text-2xl font-black">Casca Esférica Condutora (Metal)</h2>
+                <p class="text-slate-300 text-sm mt-2">Condutor em equilíbrio: campo interno é <strong>sempre zero</strong>. Toda a carga fica na superfície.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="formula-card border-t-4 border-slate-400 text-center">
+                    <h4 class="font-bold text-slate-800 mb-2">Dentro (r &lt; R)</h4>
+                    <div class="formula-display text-3xl text-slate-900">E = 0</div>
+                    <p class="text-xs text-slate-600 mt-2">Blindagem eletrostática. Nenhum campo chega ao interior.</p>
+                </div>
+                <div class="formula-card border-t-4 border-amber-500 text-center">
+                    <h4 class="font-bold text-amber-800 mb-2">Na Superfície (r = R)</h4>
+                    <div class="formula-display text-xl text-amber-900">E = &sigma; / &epsilon;<sub>0</sub></div>
+                    <p class="text-xs text-slate-600 mt-2">Note: <strong>sem o fator 2</strong> (diferente do plano). Campo sai só por um lado.</p>
+                </div>
+                <div class="formula-card border-t-4 border-indigo-500 text-center">
+                    <h4 class="font-bold text-indigo-800 mb-2">Fora (r &gt; R)</h4>
+                    <div class="formula-display text-xl text-indigo-900">E = Q / (4&pi;&epsilon;<sub>0</sub> r&sup2;)</div>
+                    <p class="text-xs text-slate-600 mt-2">Idêntico a uma carga pontual Q no centro.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geometry Quick Reference -->
+        <section class="section-animate">
+            <div class="formula-card overflow-x-auto">
+                <h3 class="font-bold text-slate-900 mb-4 text-lg">📐 Referência Rápida — Áreas e Volumes</h3>
+                <table class="w-full text-sm text-center">
+                    <thead>
+                        <tr class="bg-slate-50 text-xs uppercase text-slate-500">
+                            <th class="px-4 py-3">Geometria</th>
+                            <th class="px-4 py-3">Área da Sup. Gaussiana</th>
+                            <th class="px-4 py-3">Volume Envolvido</th>
+                            <th class="px-4 py-3">Dica</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-mono">
+                        <tr>
+                            <td class="px-4 py-3 font-sans font-bold text-blue-700">Esfera</td>
+                            <td class="px-4 py-3">4&pi;r&sup2;</td>
+                            <td class="px-4 py-3">(4/3)&pi;r&sup3;</td>
+                            <td class="px-4 py-3 font-sans text-xs text-slate-600">A = derivada do V em relação a r</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-sans font-bold text-emerald-700">Cilindro (lateral)</td>
+                            <td class="px-4 py-3">2&pi;r&middot;h</td>
+                            <td class="px-4 py-3">&pi;r&sup2;&middot;h</td>
+                            <td class="px-4 py-3 font-sans text-xs text-slate-600">Lateral = perímetro &times; altura</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-sans font-bold text-sky-700">Pillbox (plano)</td>
+                            <td class="px-4 py-3">2A (2 tampas)</td>
+                            <td class="px-4 py-3">&mdash;</td>
+                            <td class="px-4 py-3 font-sans text-xs text-slate-600">Só as tampas contam; lateral &perp; E</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-700 pt-8 pb-12 text-center">
+            <a href="index.html" class="inline-block px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-500 transition-colors">&larr; Voltar ao Painel Principal</a>
+        </footer>
+    </main>
+</body>
+</html>

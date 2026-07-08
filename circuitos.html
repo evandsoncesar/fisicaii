@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuitos RLC — Dossiê Tático | Sr. Evandson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased">
+
+    <header class="top-bar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <a href="index.html" class="back-link"><span class="text-lg">&larr;</span> Voltar ao Dossiê</a>
+                <div class="text-right">
+                    <h1 class="text-sm font-bold text-white">Circuitos AC (RLC)</h1>
+                    <p class="text-xs text-slate-500">Impedância, Ressonância &amp; Potência</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-amber-600 to-orange-600" data-chapter="RLC">
+                <p class="text-xs font-bold uppercase tracking-widest text-amber-200 mb-1">Q4 Garantida (100%)</p>
+                <h2 class="text-2xl font-black">A Lógica dos Circuitos CA (RLC)</h2>
+                <p class="text-amber-100 text-sm mt-2">A fonte alternada tem o formato <strong>V(t) = V<sub>pico</sub> &middot; sen(&omega;t)</strong>. Cuidado com V<sub>pico</sub> vs V<sub>rms</sub>.</p>
+            </div>
+
+            <!-- Circuit Diagram -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-5 formula-card flex flex-col items-center justify-center">
+                    <h3 class="font-bold text-slate-800 mb-4 text-center">Circuito Série Genérico</h3>
+                    <div class="canvas-wrapper border-none" style="max-width: 300px;">
+                        <canvas id="circuitCanvas" width="300" height="300" class="w-full h-full block"></canvas>
+                    </div>
+                    <p class="text-sm text-slate-500 text-center mt-4">A ressonância ocorre quando X<sub>L</sub> = X<sub>C</sub>.</p>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="formula-card border-l-4 border-amber-500">
+                        <div class="f-title text-amber-600">Reatância Indutiva (L)</div>
+                        <div class="formula-display">X<sub>L</sub> = &omega; &middot; L</div>
+                        <p class="text-xs text-slate-500 text-center">Oposição da bobina (&Omega;). Cresce com a frequência.</p>
+                    </div>
+                    <div class="formula-card border-l-4 border-blue-500">
+                        <div class="f-title text-blue-600">Reatância Capacitiva (C)</div>
+                        <div class="formula-display">X<sub>C</sub> = 1 / (&omega; &middot; C)</div>
+                        <p class="text-xs text-slate-500 text-center">Oposição do capacitor (&Omega;). Diminui com a frequência.</p>
+                    </div>
+                    <div class="formula-card sm:col-span-2 formula-hero" style="background: linear-gradient(135deg, #1e293b, #334155);">
+                        <div class="f-title text-slate-300">Impedância Total (Z)</div>
+                        <div class="formula-display text-xl">Z = &radic;[ R&sup2; + (X<sub>L</sub> &minus; X<sub>C</sub>)&sup2; ]</div>
+                        <p class="text-xs text-slate-400 text-center">A resistência "total" vista pela fonte. Na <strong>ressonância</strong>: Z = R (mínimo).</p>
+                    </div>
+                    <div class="formula-card">
+                        <div class="f-title text-slate-600">Valores Eficazes (RMS)</div>
+                        <div class="formula-display text-sm">V<sub>rms</sub> = V<sub>pico</sub> / &radic;2 &asymp; 0.707 &middot; V<sub>pico</sub></div>
+                        <div class="formula-display text-sm">I<sub>rms</sub> = V<sub>rms</sub> / Z</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="f-title text-slate-600">Potência Média (Watts)</div>
+                        <div class="formula-display text-sm">P = I<sub>rms</sub>&sup2; &middot; R</div>
+                        <div class="formula-display text-sm">P = V<sub>rms</sub>&middot;I<sub>rms</sub>&middot;cos(&phi;)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ressonância & Ângulo de Fase -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-violet-600 to-purple-600" data-chapter="&omega;">
+                <p class="text-xs font-bold uppercase tracking-widest text-violet-200 mb-1">Conceitos Avançados</p>
+                <h2 class="text-2xl font-black">Ressonância &amp; Ângulo de Fase</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #4c1d95, #7c3aed);">
+                    <p class="text-xs font-bold uppercase tracking-wider text-violet-200 mb-1">Frequência de Ressonância ⭐</p>
+                    <div class="formula-display text-2xl">&omega;<sub>0</sub> = 1 / &radic;(LC)</div>
+                    <p class="text-sm text-violet-100 mt-3">Na ressonância: X<sub>L</sub> = X<sub>C</sub>, logo Z = R (mínimo) e a corrente é <strong>máxima</strong>.</p>
+                    <div class="bg-white/10 border border-white/20 rounded-lg p-3 mt-3">
+                        <p class="text-xs text-violet-200"><strong>Em Hz:</strong> f<sub>0</sub> = 1 / (2&pi;&radic;(LC))</p>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Ângulo de Fase (&phi;)</p>
+                    <div class="formula-display text-slate-900">tan(&phi;) = (X<sub>L</sub> &minus; X<sub>C</sub>) / R</div>
+                    <div class="space-y-2 mt-4 text-sm">
+                        <div class="flex items-center gap-2 p-2 rounded bg-amber-50 text-amber-800">
+                            <span class="font-bold">X<sub>L</sub> &gt; X<sub>C</sub>:</span> &phi; &gt; 0, circuito <strong>indutivo</strong> (V adianta I)
+                        </div>
+                        <div class="flex items-center gap-2 p-2 rounded bg-blue-50 text-blue-800">
+                            <span class="font-bold">X<sub>C</sub> &gt; X<sub>L</sub>:</span> &phi; &lt; 0, circuito <strong>capacitivo</strong> (I adianta V)
+                        </div>
+                        <div class="flex items-center gap-2 p-2 rounded bg-emerald-50 text-emerald-800">
+                            <span class="font-bold">X<sub>L</sub> = X<sub>C</sub>:</span> &phi; = 0, <strong>ressonância</strong> (V e I em fase)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-700 pt-8 pb-12 text-center">
+            <a href="index.html" class="inline-block px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-500 transition-colors">&larr; Voltar ao Painel Principal</a>
+        </footer>
+    </main>
+
+    <script>
+        function drawCircuitDiagram() {
+            const canvas = document.getElementById('circuitCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, 300, 300);
+            ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 3;
+            const x1 = 50, y1 = 50, x2 = 250, y2 = 250;
+
+            // AC Source
+            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1, (y1+y2)/2 - 20); ctx.stroke();
+            ctx.beginPath(); ctx.arc(x1, (y1+y2)/2, 20, 0, Math.PI*2); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x1-10, (y1+y2)/2); ctx.bezierCurveTo(x1-5, (y1+y2)/2-15, x1+5, (y1+y2)/2+15, x1+10, (y1+y2)/2); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x1, (y1+y2)/2 + 20); ctx.lineTo(x1, y2); ctx.stroke();
+            ctx.fillStyle = '#000'; ctx.font = 'bold 14px Inter, Arial'; ctx.fillText('V(t)', x1-42, (y1+y2)/2+5);
+
+            // Resistor
+            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1+60, y1); ctx.stroke();
+            let rx = x1+60; ctx.beginPath(); ctx.moveTo(rx, y1);
+            for (let i=0; i<4; i++) { rx+=10; ctx.lineTo(rx, y1-15); rx+=10; ctx.lineTo(rx, y1+15); }
+            rx+=10; ctx.lineTo(rx, y1); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(rx, y1); ctx.lineTo(x2, y1); ctx.stroke();
+            ctx.fillStyle = '#b45309'; ctx.fillText('R', (x1+x2)/2-5, y1-25);
+
+            // Inductor
+            ctx.fillStyle = '#000';
+            ctx.beginPath(); ctx.moveTo(x2, y1); ctx.lineTo(x2, y1+60); ctx.stroke();
+            let ly = y1+60;
+            for (let i=0; i<4; i++) { ctx.beginPath(); ctx.arc(x2, ly+10, 10, -Math.PI/2, Math.PI/2, true); ctx.stroke(); ly+=20; }
+            ctx.beginPath(); ctx.moveTo(x2, ly); ctx.lineTo(x2, y2); ctx.stroke();
+            ctx.fillStyle = '#7c3aed'; ctx.fillText('L', x2+20, (y1+y2)/2);
+
+            // Capacitor
+            ctx.fillStyle = '#000';
+            ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo((x1+x2)/2+10, y2); ctx.stroke();
+            ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.moveTo((x1+x2)/2+10, y2-15); ctx.lineTo((x1+x2)/2+10, y2+15); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo((x1+x2)/2-10, y2-15); ctx.lineTo((x1+x2)/2-10, y2+15); ctx.stroke();
+            ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo((x1+x2)/2-10, y2); ctx.lineTo(x1, y2); ctx.stroke();
+            ctx.fillStyle = '#2563eb'; ctx.fillText('C', (x1+x2)/2-5, y2+30);
+        }
+        window.addEventListener('DOMContentLoaded', drawCircuitDiagram);
+    </script>
+</body>
+</html>

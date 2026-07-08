@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetismo &amp; Indução — Dossiê Tático | Sr. Evandson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased">
+
+    <header class="top-bar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <a href="index.html" class="back-link"><span class="text-lg">&larr;</span> Voltar ao Dossiê</a>
+                <div class="text-right">
+                    <h1 class="text-sm font-bold text-white">Magnetismo &amp; Indução</h1>
+                    <p class="text-xs text-slate-500">Biot-Savart, Ampère, Faraday &amp; Lenz</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- CAMPOS MAGNÉTICOS -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-rose-600 to-pink-600" data-chapter="B">
+                <p class="text-xs font-bold uppercase tracking-widest text-rose-200 mb-1">Campos Magnéticos</p>
+                <h2 class="text-2xl font-black">Fios, Espiras, Solenoides &amp; Toroides</h2>
+                <p class="text-rose-100 text-sm mt-2">Cargas em <strong>movimento</strong> (correntes) gerando campos magnéticos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex justify-center">
+                    <img src="img/biot_savart_fio.png" alt="Campo magnético ao redor de um fio" class="diagram-img w-full max-w-sm">
+                </div>
+                <div class="flex justify-center">
+                    <img src="img/solenoide_toroide.png" alt="Solenoide e Toroide" class="diagram-img w-full max-w-sm">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="formula-card border-l-4 border-rose-500">
+                    <div class="f-title text-rose-600">Fio Longo e Reto</div>
+                    <div class="formula-display text-rose-900">B = (&mu;<sub>0</sub> &middot; i) / (2&pi; r)</div>
+                    <p class="text-sm text-slate-600 mt-2">Campo circular ao redor do fio. Use a regra da mão direita.</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">&mu;<sub>0</sub></span> 4&pi;&times;10<sup>&minus;7</sup> T&middot;m/A</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">i</span> Corrente (A)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">r</span> Distância do fio (m)</p>
+                    </div>
+                </div>
+
+                <div class="formula-card border-l-4 border-rose-500">
+                    <div class="f-title text-rose-600">Força entre 2 Fios Paralelos</div>
+                    <div class="formula-display text-rose-900">F/L = (&mu;<sub>0</sub> &middot; i<sub>1</sub> &middot; i<sub>2</sub>) / (2&pi; d)</div>
+                    <div class="mt-3 grid grid-cols-2 gap-2 text-center text-xs">
+                        <div class="bg-emerald-50 text-emerald-800 p-2 rounded font-bold">Mesmo sentido = <strong>Atraem</strong></div>
+                        <div class="bg-red-50 text-red-800 p-2 rounded font-bold">Opostos = <strong>Repelem</strong></div>
+                    </div>
+                </div>
+
+                <div class="formula-card border-l-4 border-pink-500">
+                    <div class="f-title text-pink-600">Espira Circular (centro)</div>
+                    <div class="formula-display text-pink-900">B = (&mu;<sub>0</sub> &middot; i) / (2R)</div>
+                    <p class="text-xs text-slate-600 mt-2">Se for <strong>meia espira</strong>: divida por 2.</p>
+                </div>
+
+                <div class="formula-card border-l-4 border-pink-500">
+                    <div class="f-title text-pink-600">Solenoide Ideal</div>
+                    <div class="formula-display text-pink-900">B = &mu;<sub>0</sub> &middot; n &middot; i</div>
+                    <p class="text-xs text-slate-600 mt-2">n = N/L (espiras por metro). Campo <strong>uniforme</strong> no interior.</p>
+                </div>
+
+                <div class="formula-card md:col-span-2 border-l-4 border-fuchsia-500">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <div class="f-title text-fuchsia-600">Toroide</div>
+                            <div class="formula-display text-fuchsia-900">B = (&mu;<sub>0</sub> &middot; i &middot; N) / (2&pi; r)</div>
+                            <p class="text-sm text-slate-600 mt-2">Campo confinado dentro. <strong>Não é uniforme</strong> — depende de r.</p>
+                        </div>
+                        <div class="bg-slate-900 rounded-xl p-4 text-white">
+                            <h4 class="font-bold text-sm text-rose-400 uppercase mb-2">🧭 Regra da Mão Direita</h4>
+                            <p class="text-sm"><strong>Polegar:</strong> Sentido da Corrente (i)</p>
+                            <p class="text-sm"><strong>Dedos a envolver:</strong> Sentido de B</p>
+                            <p class="text-xs text-slate-400 mt-2 border-t border-slate-700 pt-2"><strong>Produto vetorial:</strong> Dedos apontam ds&#8407;, fecham para r&#770;, polegar = dB&#8407;.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INDUÇÃO -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-emerald-500 to-teal-600" data-chapter="&epsilon;">
+                <p class="text-xs font-bold uppercase tracking-widest text-emerald-200 mb-1">Indução Eletromagnética</p>
+                <h2 class="text-2xl font-black">Faraday, Lenz &amp; FEM de Movimento</h2>
+                <p class="text-emerald-100 text-sm mt-2">Campos magnéticos que <strong>variam no tempo</strong> criam voltagem.</p>
+            </div>
+
+            <div class="flex justify-center">
+                <img src="img/faraday_inducao.png" alt="Indução eletromagnética" class="diagram-img w-full max-w-md">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="formula-card border-l-4 border-emerald-500">
+                    <div class="f-title text-emerald-600">Fluxo Magnético</div>
+                    <div class="formula-display text-emerald-900">&Phi;<sub>B</sub> = B &middot; A &middot; cos(&theta;)</div>
+                    <p class="text-xs text-slate-600 mt-2">Unidade: Weber (Wb). Forma geral: &int; B&#8407;&middot;dA&#8407;</p>
+                </div>
+
+                <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #065f46, #059669);">
+                    <div class="f-title text-emerald-200">Lei de Faraday &amp; Lenz ⭐</div>
+                    <div class="formula-display text-xl">&epsilon; = &minus;N &middot; d&Phi;<sub>B</sub>/dt</div>
+                    <p class="text-xs text-emerald-100 mt-2">O sinal (&minus;) é a Lei de Lenz: a tensão <strong>se opõe à variação</strong>.</p>
+                </div>
+
+                <div class="formula-card md:col-span-2 border-l-4 border-teal-500">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <div class="f-title text-teal-600">FEM de Movimento (Barra em Trilhos)</div>
+                            <div class="formula-display text-teal-900 text-2xl">|&epsilon;| = B &middot; L &middot; v</div>
+                            <div class="space-y-1 mt-3">
+                                <p class="text-xs text-slate-500"><span class="var-tag bg-teal-100 text-teal-700">B</span> Campo magnético (T)</p>
+                                <p class="text-xs text-slate-500"><span class="var-tag bg-teal-100 text-teal-700">L</span> Comprimento da barra (m)</p>
+                                <p class="text-xs text-slate-500"><span class="var-tag bg-teal-100 text-teal-700">v</span> Velocidade da barra (m/s)</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 rounded-xl p-5 text-white">
+                            <h4 class="text-sm font-bold text-amber-400 mb-3 uppercase tracking-wider">⚡ Checklist Indução</h4>
+                            <ol class="space-y-2 text-sm text-slate-300 list-decimal list-inside">
+                                <li>O que está a mudar? (B, A, ou &theta;?)</li>
+                                <li>Escreva &Phi;<sub>B</sub> em função de t</li>
+                                <li>Derive: d&Phi;/dt</li>
+                                <li>Multiplique por &minus;N</li>
+                                <li>Lei de Lenz: sentido da corrente</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-700 pt-8 pb-12 text-center">
+            <a href="index.html" class="inline-block px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-500 transition-colors">&larr; Voltar ao Painel Principal</a>
+        </footer>
+    </main>
+</body>
+</html>

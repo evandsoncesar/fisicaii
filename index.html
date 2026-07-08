@@ -1,748 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dossiê Final Eletromagnetismo - Sr. Evandson</title>
-
+    <title>Dossiê Tático de Finais — Eletromagnetismo | Sr. Evandson</title>
+    <meta name="description" content="Dossiê Tático de Finais — Material completo de Física III para Engenharia de Computação.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #f8fafc;
-            overflow-x: hidden;
-        }
-
-        .chart-container {
+        .hub-card {
             position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 450px;
+            overflow: hidden;
+            border-radius: 1.25rem;
+            padding: 2rem 1.5rem;
+            color: white;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: block;
+            min-height: 200px;
         }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
+        .hub-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
         }
-
-        .canvas-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            aspect-ratio: 1;
-            background: #ffffff;
-            border-radius: 1rem;
-            border: 2px solid #e2e8f0;
-            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+        .hub-card::before {
+            content: attr(data-icon);
+            position: absolute;
+            right: -15px;
+            bottom: -20px;
+            font-size: 7rem;
+            opacity: 0.12;
+            line-height: 1;
+            pointer-events: none;
         }
-
-        .filter-btn {
-            transition: all 0.2s ease;
+        .hub-card .card-number {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
         }
-
-        .filter-btn.active {
-            background-color: #1e293b;
-            color: #ffffff;
-            border-color: #1e293b;
+        .hub-card h3 {
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
-
-        .nav-tab {
-            transition: all 0.2s ease-in-out;
-            border-bottom: 3px solid transparent;
+        .hub-card p {
+            font-size: 0.8125rem;
+            opacity: 0.85;
+            line-height: 1.5;
         }
-
-        .nav-tab.active {
-            border-bottom-color: #6366f1;
-            color: #4338ca;
-            font-weight: 700;
-            background-color: #eef2ff;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cat-eletro {
-            border-left: 4px solid #6366f1;
-        }
-
-        .cat-mag {
-            border-left: 4px solid #f43f5e;
-        }
-
-        .cat-inducao {
-            border-left: 4px solid #10b981;
-        }
-
-        .cat-circ {
-            border-left: 4px solid #f59e0b;
-        }
-
-        /* Formula Box Styling */
-        .f-box {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
-        }
-
-        .f-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .f-title {
-            font-size: 0.75rem;
+        .hub-card .tag {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 0.35rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
         }
 
-        .f-math {
-            font-family: monospace;
-            font-size: 1.25rem;
-            font-weight: 700;
-            background: #f1f5f9;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            text-align: center;
-            margin-bottom: 0.5rem;
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e293b 100%);
         }
 
-        .unit-i {
-            color: #3b82f6;
-            font-weight: 900;
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .unit-j {
-            color: #10b981;
-            font-weight: 900;
-        }
+        .stagger-1 { animation: floatUp 0.5s ease-out 0.1s both; }
+        .stagger-2 { animation: floatUp 0.5s ease-out 0.2s both; }
+        .stagger-3 { animation: floatUp 0.5s ease-out 0.3s both; }
+        .stagger-4 { animation: floatUp 0.5s ease-out 0.4s both; }
+        .stagger-5 { animation: floatUp 0.5s ease-out 0.5s both; }
+        .stagger-6 { animation: floatUp 0.5s ease-out 0.6s both; }
     </style>
 </head>
+<body class="antialiased hero-gradient">
 
-<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center py-3">
-                <div class="flex items-center gap-3 w-full md:w-auto mb-3 md:mb-0">
-                    <div
-                        class="w-10 h-10 bg-indigo-500 rounded flex items-center justify-center font-bold text-xl tracking-tighter">
-                        Q&bull;A
-                    </div>
-                    <div>
-                        <h1 class="text-lg font-bold tracking-tight">Dossiê Tático de Finais</h1>
-                        <p class="text-xs text-slate-400 font-medium">Sr. Evandson | Eng. Computação</p>
-                    </div>
-                </div>
-
-                <nav class="flex w-full md:w-auto overflow-x-auto no-scrollbar bg-slate-800 rounded-lg p-1">
-                    <button onclick="switchTab('padrao')" id="tab-padrao"
-                        class="nav-tab active px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded whitespace-nowrap">1.
-                        O Padrão</button>
-                    <button onclick="switchTab('vetores')" id="tab-vetores"
-                        class="nav-tab px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded whitespace-nowrap">2.
-                        Vetores Unitários</button>
-                    <button onclick="switchTab('gauss')" id="tab-gauss"
-                        class="nav-tab px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded whitespace-nowrap">3.
-                        Gauss & Geometria</button>
-                    <button onclick="switchTab('circuitos')" id="tab-circuitos"
-                        class="nav-tab px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded whitespace-nowrap">4.
-                        Circuitos RLC</button>
-                    <button onclick="switchTab('magnetismo')" id="tab-magnetismo"
-                        class="nav-tab px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded whitespace-nowrap">5.
-                        Magnetismo</button>
-                    <a href="formulario.html"
-                        class="px-4 py-2 text-sm font-bold text-white rounded whitespace-nowrap bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 transition-all ml-1 flex items-center gap-1">📖
-                        Formulário</a>
-                </nav>
+        <!-- Hero Header -->
+        <header class="text-center mb-12 section-animate">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/20 border border-indigo-400/30 rounded-full mb-6">
+                <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider">Eng. Computação &bull; Física III</span>
             </div>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-3">
+                Dossiê Tático de Finais
+            </h1>
+            <p class="text-slate-400 max-w-xl mx-auto text-base">
+                Material completo e organizado para dominar a prova de <strong class="text-slate-200">Eletromagnetismo</strong>. Cada módulo é independente &mdash; clique e estude.
+            </p>
+            <div class="mt-6 flex justify-center gap-3 text-xs text-slate-500">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span> 6 módulos</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 bg-blue-500 rounded-full"></span> Imagens didáticas</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 bg-amber-500 rounded-full"></span> Interativo</span>
+            </div>
+        </header>
+
+        <!-- Navigation Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Card 1: O Padrão -->
+            <a href="padrao.html" class="hub-card stagger-1" data-icon="📊"
+               style="background: linear-gradient(135deg, #334155, #1e293b);">
+                <span class="card-number">Módulo 01</span>
+                <h3>O Padrão do Professor</h3>
+                <p>Análise de 5 semestres de provas anteriores. Gráfico de tendências e matriz histórica com filtros.</p>
+                <span class="tag">📊 Estatístico</span>
+            </a>
+
+            <!-- Card 2: Vetores -->
+            <a href="vetores.html" class="hub-card stagger-2" data-icon="î"
+               style="background: linear-gradient(135deg, #3730a3, #4f46e5);">
+                <span class="card-number">Módulo 02</span>
+                <h3>Cálculo Vetorial</h3>
+                <p>Decomposição em î/ĵ, 4 quadrantes, ângulos notáveis, produto escalar vs vetorial, coordenadas cilíndricas.</p>
+                <span class="tag">🧮 Interativo</span>
+            </a>
+
+            <!-- Card 3: Gauss -->
+            <a href="gauss.html" class="hub-card stagger-3" data-icon="⚡"
+               style="background: linear-gradient(135deg, #1d4ed8, #3b82f6);">
+                <span class="card-number">Módulo 03</span>
+                <h3>Gauss &amp; Geometria</h3>
+                <p>Esfera (uniforme e ρ=ar), cilindro, plano infinito e casca condutora. Passo-a-passo visual.</p>
+                <span class="tag">🎯 Q1 Garantida</span>
+            </a>
+
+            <!-- Card 4: Circuitos -->
+            <a href="circuitos.html" class="hub-card stagger-4" data-icon="Ω"
+               style="background: linear-gradient(135deg, #b45309, #d97706);">
+                <span class="card-number">Módulo 04</span>
+                <h3>Circuitos AC (RLC)</h3>
+                <p>Impedância, reatâncias, ressonância, ângulo de fase, potência média e valores RMS.</p>
+                <span class="tag">⚡ Q4 Garantida</span>
+            </a>
+
+            <!-- Card 5: Magnetismo -->
+            <a href="magnetismo.html" class="hub-card stagger-5" data-icon="🧲"
+               style="background: linear-gradient(135deg, #be123c, #e11d48);">
+                <span class="card-number">Módulo 05</span>
+                <h3>Magnetismo &amp; Indução</h3>
+                <p>Biot-Savart, Ampère, fios, solenoides, toroides. Faraday, Lenz, FEM de movimento.</p>
+                <span class="tag">🧭 Mão Direita</span>
+            </a>
+
+            <!-- Card 6: Formulário -->
+            <a href="formulario.html" class="hub-card stagger-6" data-icon="📖"
+               style="background: linear-gradient(135deg, #5b21b6, #7c3aed);">
+                <span class="card-number">Módulo 06</span>
+                <h3>Formulário Completo</h3>
+                <p>Todas as equações de Eletromagnetismo com anatomia de cada variável. Referência rápida para a prova.</p>
+                <span class="tag">📖 Referência</span>
+            </a>
         </div>
-    </header>
 
-    <main class="flex-grow w-full relative">
+        <!-- Footer -->
+        <footer class="text-center mt-16 pb-8">
+            <p class="text-sm text-slate-500">Dossiê Tático de Finais &mdash; <strong class="text-slate-400">Sr. Evandson</strong></p>
+            <p class="text-xs text-slate-600 mt-1">Material de estudo pessoal &bull; Física III &bull; Eletromagnetismo</p>
+        </footer>
+    </div>
 
-        <section id="content-padrao" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 fade-in">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Padrões de Avaliação (Últimos 5 Semestres)</h2>
-                <p class="text-slate-600 mb-6">
-                    Analisámos o apanhado das provas que nos enviou. A conclusão é clara: <strong>o seu professor segue
-                        uma estrutura extremamente previsível.</strong> O gráfico abaixo agrupa os temas específicos em
-                    quatro grandes categorias físicas para revelar a anatomia exata do exame.
-                </p>
-
-                <div class="chart-container">
-                    <canvas id="trendChart"></canvas>
-                </div>
-
-                <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                    <div class="flex items-center gap-2 p-2 rounded bg-indigo-50 text-indigo-800 font-medium">
-                        <div class="w-3 h-3 rounded-full bg-indigo-500"></div> Eletrostática & Gauss
-                    </div>
-                    <div class="flex items-center gap-2 p-2 rounded bg-rose-50 text-rose-800 font-medium">
-                        <div class="w-3 h-3 rounded-full bg-rose-500"></div> Magnetismo
-                    </div>
-                    <div class="flex items-center gap-2 p-2 rounded bg-emerald-50 text-emerald-800 font-medium">
-                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div> Indução
-                    </div>
-                    <div class="flex items-center gap-2 p-2 rounded bg-amber-50 text-amber-800 font-medium">
-                        <div class="w-3 h-3 rounded-full bg-amber-500"></div> Circuitos
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                        <h2 class="text-xl font-bold text-slate-900">Matriz Histórica Detalhada</h2>
-                        <div class="flex flex-wrap gap-2" id="filter-controls">
-                            <button
-                                class="filter-btn active px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50"
-                                data-filter="all">Todas</button>
-                            <button
-                                class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50"
-                                data-filter="q1">Q1</button>
-                            <button
-                                class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50"
-                                data-filter="q2">Q2</button>
-                            <button
-                                class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50"
-                                data-filter="q3">Q3</button>
-                            <button
-                                class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50"
-                                data-filter="q4">Q4</button>
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
-                                <tr>
-                                    <th class="px-4 py-3 font-bold">Semestre</th>
-                                    <th class="px-4 py-3 font-bold">Questão 1</th>
-                                    <th class="px-4 py-3 font-bold">Questão 2</th>
-                                    <th class="px-4 py-3 font-bold">Questão 3</th>
-                                    <th class="px-4 py-3 font-bold">Questão 4</th>
-                                </tr>
-                            </thead>
-                            <tbody id="matrix-body" class="divide-y divide-slate-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold mb-4 text-amber-400">Diretivas de Estudo</h2>
-                    <ul class="space-y-4 text-sm">
-                        <li class="pb-4 border-b border-slate-700">
-                            <strong class="text-indigo-300 block mb-1">Q1 (100%): Gauss & Eletrostática</strong>
-                            Foco total em Cilindros e Esferas. Memorize como montar integrais para densidade n&atilde;o
-                            uniforme.
-                        </li>
-                        <li class="pb-4 border-b border-slate-700">
-                            <strong class="text-amber-300 block mb-1">Q4 (100%): Circuitos AC</strong>
-                            Apareceu em 5/5 provas (RL ou RLC). Domine Z, Vrms, Irms, e Pot&ecirc;ncia.
-                        </li>
-                        <li>
-                            <strong class="text-emerald-300 block mb-1">Q2 e Q3 (Vari&aacute;vel)</strong>
-                            Biot-Savart (Fios) e Indu&ccedil;&atilde;o de Faraday alternam nestas
-                            posi&ccedil;&otilde;es.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="content-vetores" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 fade-in">
-            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-2xl shadow-sm">
-                <h2 class="text-2xl font-bold text-indigo-900 mb-2">Descomplicando Vetores Unit&aacute;rios (i e j)</h2>
-                <p class="text-indigo-800">
-                    O maior erro em provas &eacute; errar o sinal do vetor ou esquecer como decompor. Em vez de
-                    adivinhar, use a matem&aacute;tica exata:
-                    A componente X usa sempre o <strong>Cosseno</strong> (com sono = deitado) e acompanha o
-                    unit&aacute;rio <strong>&icirc;</strong>.
-                    A componente Y usa o <strong>Seno</strong> (sem sono = em p&eacute;) e acompanha o
-                    <strong>&jcirc;</strong>.
-                </p>
-            </div>
-
-            <div
-                class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                <div class="space-y-6">
-                    <div class="f-box">
-                        <div class="f-title text-indigo-600">A Forma Universal do Vetor Resultante</div>
-                        <div class="f-math">F&#8407; = |F|&middot;cos(&theta;) <span class="unit-i">&icirc;</span> +
-                            |F|&middot;sen(&theta;) <span class="unit-j">&jcirc;</span></div>
-                        <p class="text-sm text-slate-600 text-center mt-2">Sendo &theta; o &acirc;ngulo partindo do eixo
-                            X positivo no sentido anti-hor&aacute;rio.</p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <label class="block text-sm font-bold text-slate-700">M&oacute;dulo da For&ccedil;a (N, &mu;T,
-                            etc): <span id="val-mag" class="text-indigo-600">100</span></label>
-                        <input type="range" id="slider-mag" min="10" max="200" value="100"
-                            class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-
-                        <label class="block text-sm font-bold text-slate-700">&Acirc;ngulo (&theta;): <span
-                                id="val-angle" class="text-rose-600">45</span>&deg;</label>
-                        <input type="range" id="slider-angle" min="0" max="360" value="45"
-                            class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                    </div>
-
-                    <div class="bg-slate-900 p-6 rounded-xl text-center">
-                        <p class="text-slate-400 text-xs uppercase tracking-wider mb-2">Resposta na Prova</p>
-                        <p class="text-2xl font-bold text-white font-mono" id="vector-output">F&#8407; = 70.7 <span
-                                class="unit-i">&icirc;</span> + 70.7 <span class="unit-j">&jcirc;</span></p>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="canvas-wrapper">
-                        <canvas id="vectorCanvas" width="400" height="400"
-                            class="w-full h-full block rounded-xl"></canvas>
-                    </div>
-                    <p class="text-center text-xs text-slate-500 mt-3">Observe os sinais de &icirc; e &jcirc; a mudarem
-                        conforme passa pelos 4 quadrantes.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="content-gauss" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 fade-in">
-            <div class="bg-blue-900 text-white p-6 rounded-2xl shadow-md text-center">
-                <h2 class="text-2xl font-bold mb-2">Manual de Sobreviv&ecirc;ncia: Lei de Gauss</h2>
-                <p class="text-blue-200 font-mono text-lg mt-4">&oint; E &middot; dA = q<sub>env</sub> /
-                    &epsilon;<sub>0</sub></p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div
-                    class="bg-white rounded-2xl border border-blue-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                    <div class="bg-blue-50 p-4 border-b border-blue-100 flex items-center gap-3">
-                        <div class="text-3xl text-blue-500">&#9679;</div>
-                        <h3 class="text-xl font-bold text-blue-900">Geometria da Esfera</h3>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="f-box bg-slate-50 shadow-none">
-                            <div class="f-title text-slate-500">Volume (Carga Envolvida 3D)</div>
-                            <div class="f-math text-slate-800">V = 4/3 &pi; r&sup3;</div>
-                            <p class="text-xs text-slate-600 text-center"><strong>Dica:</strong> Volume = 3D. Expoente 3
-                                e divide por 3.</p>
-                        </div>
-                        <div class="f-box bg-slate-50 shadow-none">
-                            <div class="f-title text-slate-500">&Aacute;rea da Superf&iacute;cie (Lado Esquerdo de
-                                Gauss)</div>
-                            <div class="f-math text-blue-700">A = 4 &pi; r&sup2;</div>
-                            <p class="text-xs text-slate-600 text-center"><strong>Dica:</strong> &Eacute; a derivada
-                                matemática do Volume. d/dr(4/3&pi;r&sup3;).</p>
-                        </div>
-                        <div class="bg-blue-100 p-4 rounded-lg border border-blue-200">
-                            <div class="f-title text-blue-800">Integral para &rho; Vari&aacute;vel (N&atilde;o Uniforme)
-                            </div>
-                            <div class="font-mono text-center font-bold text-blue-900">q<sub>env</sub> = &int; &rho;(r)
-                                &middot; (4&pi;r&sup2;) dr</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white rounded-2xl border border-emerald-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                    <div class="bg-emerald-50 p-4 border-b border-emerald-100 flex items-center gap-3">
-                        <div class="text-3xl text-emerald-500">&#9646;</div>
-                        <h3 class="text-xl font-bold text-emerald-900">Geometria do Cilindro</h3>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="f-box bg-slate-50 shadow-none">
-                            <div class="f-title text-slate-500">Volume (Pilha de Moedas)</div>
-                            <div class="f-math text-slate-800">V = &pi; r&sup2; h</div>
-                            <p class="text-xs text-slate-600 text-center"><strong>Dica:</strong> &Aacute;rea do
-                                c&iacute;rculo (&pi;r&sup2;) multiplicada pela altura (h).</p>
-                        </div>
-                        <div class="f-box bg-slate-50 shadow-none">
-                            <div class="f-title text-slate-500">&Aacute;rea Lateral (O R&oacute;tulo da Lata)</div>
-                            <div class="f-math text-emerald-700">A = 2 &pi; r h</div>
-                            <p class="text-xs text-slate-600 text-center"><strong>Dica:</strong> Ret&acirc;ngulo
-                                desenrolado. Base &eacute; o per&iacute;metro (2&pi;r), vezes altura.</p>
-                        </div>
-                        <div class="bg-emerald-100 p-4 rounded-lg border border-emerald-200">
-                            <div class="f-title text-emerald-800">Integral para &rho; Vari&aacute;vel (N&atilde;o
-                                Uniforme)</div>
-                            <div class="font-mono text-center font-bold text-emerald-900">q<sub>env</sub> = &int;
-                                &rho;(r) &middot; (2&pi;rh) dr</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="content-circuitos" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 fade-in">
-
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-2xl shadow-sm">
-                <h2 class="text-2xl font-bold text-amber-900 mb-2">A L&oacute;gica dos Circuitos CA (RLC)</h2>
-                <p class="text-amber-800">
-                    A fonte alternada tem o formato <strong>V(t) = V<sub>pico</sub> &middot; sen(&omega;t)</strong>.
-                    Cuidado com as armadilhas de V<sub>pico</sub> versus V<sub>rms</sub>. A pot&ecirc;ncia real
-                    s&oacute; &eacute; consumida pelo Resistor. O indutor e o capacitor apenas atrasam/adiantam a
-                    corrente.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div
-                    class="lg:col-span-5 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col items-center justify-center">
-                    <h3 class="font-bold text-slate-800 mb-4 text-center">Circuito S&eacute;rie Gen&eacute;rico</h3>
-                    <div class="canvas-wrapper border-none" style="max-width: 300px;">
-                        <canvas id="circuitCanvas" width="300" height="300" class="w-full h-full block"></canvas>
-                    </div>
-                    <div class="mt-4 text-sm text-slate-500 text-center">A resson&acirc;ncia ocorre quando o bloqueio da
-                        bobina (X<sub>L</sub>) cancela perfeitamente o bloqueio do capacitor (X<sub>C</sub>).</div>
-                </div>
-
-                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="f-box border-amber-200">
-                        <div class="f-title text-amber-600">Reat&acirc;ncia Indutiva (L)</div>
-                        <div class="f-math">X<sub>L</sub> = &omega; &middot; L</div>
-                        <p class="text-xs text-slate-500 text-center">Oposi&ccedil;&atilde;o gerada pela bobina
-                            (&Omega;)</p>
-                    </div>
-                    <div class="f-box border-blue-200">
-                        <div class="f-title text-blue-600">Reat&acirc;ncia Capacitiva (C)</div>
-                        <div class="f-math">X<sub>C</sub> = 1 / (&omega; &middot; C)</div>
-                        <p class="text-xs text-slate-500 text-center">Oposi&ccedil;&atilde;o gerada pelo capacitor
-                            (&Omega;)</p>
-                    </div>
-                    <div class="f-box sm:col-span-2 border-slate-800 bg-slate-800 text-white">
-                        <div class="f-title text-slate-300">Imped&acirc;ncia Total (Z)</div>
-                        <div class="f-math bg-slate-900 text-white border border-slate-700">Z = &radic; [ R&sup2; +
-                            (X<sub>L</sub> - X<sub>C</sub>)&sup2; ]</div>
-                        <p class="text-xs text-slate-400 text-center">A resist&ecirc;ncia total do circuito.
-                            <strong>Resson&acirc;ncia:</strong> Z = R</p>
-                    </div>
-                    <div class="f-box">
-                        <div class="f-title text-slate-600">Valores Eficazes (RMS)</div>
-                        <div class="f-math text-sm">V<sub>rms</sub> = V<sub>pico</sub> / &radic;2<br>I<sub>rms</sub> =
-                            I<sub>pico</sub> / &radic;2</div>
-                    </div>
-                    <div class="f-box">
-                        <div class="f-title text-slate-600">Pot&ecirc;ncia M&eacute;dia (Watts)</div>
-                        <div class="f-math text-sm">P = I<sub>rms</sub>&sup2; &middot; R<br>P = V<sub>rms</sub>
-                            I<sub>rms</sub> cos(&phi;)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="content-magnetismo" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 fade-in">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-200">
-                    <h3 class="text-xl font-bold text-rose-900 mb-4 border-b border-rose-100 pb-2">Campo
-                        Magn&eacute;tico (Fios)</h3>
-
-                    <div class="f-box mb-4 bg-rose-50 shadow-none border-none">
-                        <div class="f-title text-rose-600">Fio Longo e Reto</div>
-                        <div class="f-math text-rose-900 bg-white">B = (&mu;<sub>0</sub> &middot; i) / (2 &pi; r)</div>
-                    </div>
-
-                    <div class="f-box mb-4 bg-rose-50 shadow-none border-none">
-                        <div class="f-title text-rose-600">For&ccedil;a entre 2 Fios Paralelos</div>
-                        <div class="f-math text-rose-900 bg-white">F/L = (&mu;<sub>0</sub> i<sub>1</sub> i<sub>2</sub>)
-                            / (2 &pi; d)</div>
-                        <p class="text-xs text-rose-700 text-center mt-2">Mesmo sentido = <strong>Atraem-se</strong>.
-                            Sentidos opostos = <strong>Repelem-se</strong>.</p>
-                    </div>
-
-                    <div class="bg-slate-900 p-4 rounded-xl text-white">
-                        <h4 class="font-bold text-sm text-rose-400 uppercase mb-2">A Regra da M&atilde;o Direita</h4>
-                        <p class="text-sm"><strong>Polegar:</strong> Sentido da Corrente (i).</p>
-                        <p class="text-sm"><strong>Dedos a envolver:</strong> Sentido circular do Campo Magnético (B).
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-200">
-                    <h3 class="text-xl font-bold text-emerald-900 mb-4 border-b border-emerald-100 pb-2">
-                        Indu&ccedil;&atilde;o (Lei de Faraday)</h3>
-
-                    <div class="f-box mb-4 bg-emerald-50 shadow-none border-none">
-                        <div class="f-title text-emerald-600">Fluxo Magn&eacute;tico</div>
-                        <div class="f-math text-emerald-900 bg-white">&Phi;<sub>B</sub> = &int; B &middot; dA = B
-                            &middot; A &middot; cos(&theta;)</div>
-                        <p class="text-xs text-emerald-700 text-center mt-2">Unidade: Weber (Wb)</p>
-                    </div>
-
-                    <div class="f-box mb-4 bg-emerald-50 shadow-none border-none">
-                        <div class="f-title text-emerald-600">For&ccedil;a Eletromotriz Induzida</div>
-                        <div class="f-math text-emerald-900 bg-white">&epsilon; = - d&Phi;<sub>B</sub> / dt</div>
-                        <p class="text-xs text-emerald-700 text-center mt-2">Tem de derivar a fun&ccedil;&atilde;o do
-                            fluxo em rela&ccedil;&atilde;o ao tempo (t).</p>
-                    </div>
-
-                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
-                        <h4 class="font-bold text-sm text-slate-600 uppercase mb-2">Lei de Lenz</h4>
-                        <p class="text-sm text-slate-700">A corrente induzida vai gerar um campo magn&eacute;tico que
-                            <strong>tenta anular a mudan&ccedil;a</strong> ocorrida. O universo odeia
-                            varia&ccedil;&otilde;es bruscas!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <script>
-        // === Core Navigation ===
-        function switchTab(tabId) {
-            const tabs = ['padrao', 'vetores', 'gauss', 'circuitos', 'magnetismo'];
-            tabs.forEach(id => {
-                document.getElementById('content-' + id).classList.add('hidden');
-                document.getElementById('tab-' + id).classList.remove('active', 'bg-slate-700', 'text-white');
-            });
-
-            document.getElementById('content-' + tabId).classList.remove('hidden');
-            const btn = document.getElementById('tab-' + tabId);
-            btn.classList.add('active', 'bg-slate-700', 'text-white');
-
-            // Handle rendering when unhidden to prevent sizing issues
-            if (tabId === 'vetores') drawUnitVector();
-            if (tabId === 'circuitos') drawCircuitDiagram();
-        }
-
-        // ==========================================
-        // 1. O PADRÃO (Chart & Matrix Logic)
-        // ==========================================
-        const examData = [
-            { period: '2023.2', q1: { text: 'Campo E. / Cilindro / N. Uniforme', cat: 'eletro' }, q2: { text: 'Circuito R', cat: 'circ' }, q3: { text: 'Circuito (R + B)', cat: 'circ' }, q4: { text: 'Circuito (RL)', cat: 'circ' } },
-            { period: '2024.1', q1: { text: 'Campo E. / Dipolo', cat: 'eletro' }, q2: { text: 'Carga / Campo E.', cat: 'eletro' }, q3: { text: 'Campo Magnético', cat: 'mag' }, q4: { text: 'Circuito (RLC)', cat: 'circ' } },
-            { period: '2024.2', q1: { text: 'Carga / Esfera / Uniforme', cat: 'eletro' }, q2: { text: 'Momento M. / Torque', cat: 'mag' }, q3: { text: 'Campo M. 2 fios', cat: 'mag' }, q4: { text: 'Circuito (RLC)', cat: 'circ' } },
-            { period: '2025.1', q1: { text: 'Campo Elétrico / Fluxo', cat: 'eletro' }, q2: { text: 'Campo M. / [F/L]', cat: 'mag' }, q3: { text: 'C. Induzida / Potência', cat: 'inducao' }, q4: { text: 'Circuito (RL)', cat: 'circ' } },
-            { period: '2025.2', q1: { text: 'Campo E. / Esfera / N. Uniforme', cat: 'eletro' }, q2: { text: 'Circuito R', cat: 'circ' }, q3: { text: 'C. Induzida / Potência', cat: 'inducao' }, q4: { text: 'Circuito (RLC)', cat: 'circ' } }
-        ];
-
-        function getCategoryStyle(cat) {
-            switch (cat) {
-                case 'eletro': return 'bg-indigo-50 text-indigo-700 cat-eletro';
-                case 'mag': return 'bg-rose-50 text-rose-700 cat-mag';
-                case 'inducao': return 'bg-emerald-50 text-emerald-700 cat-inducao';
-                case 'circ': return 'bg-amber-50 text-amber-800 cat-circ';
-                default: return 'bg-slate-50 text-slate-600';
-            }
-        }
-
-        function renderTable(filter) {
-            const tbody = document.getElementById('matrix-body');
-            tbody.innerHTML = '';
-            examData.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50 transition-colors fade-in';
-                let html = `<td class="px-4 py-4 font-bold text-slate-800 whitespace-nowrap">${row.period}</td>`;
-                ['q1', 'q2', 'q3', 'q4'].forEach(q => {
-                    if (filter === 'all' || filter === q) {
-                        html += `<td class="px-4 py-3 min-w-[180px]"><div class="px-2 py-2 rounded text-xs font-semibold ${getCategoryStyle(row[q].cat)} shadow-sm">${row[q].text}</div></td>`;
-                    } else {
-                        html += `<td class="px-4 py-3"><div class="text-slate-300 text-center">-</div></td>`;
-                    }
-                });
-                tr.innerHTML = html;
-                tbody.appendChild(tr);
-            });
-        }
-
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-slate-900', 'text-white'));
-                e.target.classList.add('active', 'bg-slate-900', 'text-white');
-                renderTable(e.target.dataset.filter);
-            });
-        });
-
-        function initChart() {
-            const ctx = document.getElementById('trendChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Questão 1', 'Questão 2', 'Questão 3', 'Questão 4'],
-                    datasets: [
-                        { label: 'Eletrostática & Gauss', data: [5, 1, 0, 0], backgroundColor: '#6366f1', stack: '0' },
-                        { label: 'Magnetismo', data: [0, 2, 2, 0], backgroundColor: '#f43f5e', stack: '0' },
-                        { label: 'Indução', data: [0, 0, 2, 0], backgroundColor: '#10b981', stack: '0' },
-                        { label: 'Circuitos (AC/DC)', data: [0, 2, 1, 5], backgroundColor: '#f59e0b', stack: '0' }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { tooltip: { mode: 'index', intersect: false }, legend: { position: 'bottom' } },
-                    scales: {
-                        x: { stacked: true, grid: { display: false } },
-                        y: { stacked: true, max: 5, ticks: { stepSize: 1 }, title: { display: true, text: 'Nº de Aparições' } }
-                    }
-                }
-            });
-        }
-
-        // ==========================================
-        // 2. VETORES (Canvas Converter Logic)
-        // ==========================================
-        function drawUnitVector() {
-            const canvas = document.getElementById('vectorCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-
-            const mag = parseFloat(document.getElementById('slider-mag').value);
-            const angleDeg = parseFloat(document.getElementById('slider-angle').value);
-
-            // Update Labels
-            document.getElementById('val-mag').innerText = mag;
-            document.getElementById('val-angle').innerText = angleDeg;
-
-            const angleRad = (angleDeg * Math.PI) / 180;
-            const fx = mag * Math.cos(angleRad);
-            const fy = mag * Math.sin(angleRad); // standard math Y up
-
-            const signY = fy >= 0 ? '+' : '-';
-            document.getElementById('vector-output').innerHTML = `F&#8407; = ${fx.toFixed(1)} <span class="unit-i">&icirc;</span> ${signY} ${Math.abs(fy).toFixed(1)} <span class="unit-j">&jcirc;</span>`;
-
-            // Draw Process
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const cx = 200, cy = 200;
-            const scale = 1.2; // fit 200 mag in 200px space
-
-            // Grid & Axes
-            ctx.strokeStyle = '#f1f5f9'; ctx.lineWidth = 1;
-            for (let i = 0; i <= 400; i += 40) {
-                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 400); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(400, i); ctx.stroke();
-            }
-            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(400, cy); ctx.stroke(); // X
-            ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, 400); ctx.stroke(); // Y
-
-            // Labels
-            ctx.fillStyle = '#64748b'; ctx.font = 'bold 14px Arial';
-            ctx.fillText('+X (i)', 350, cy - 10);
-            ctx.fillText('+Y (j)', cx + 10, 20);
-
-            const endX = cx + (fx * scale);
-            const endY = cy - (fy * scale); // Invert Y for canvas
-
-            // Draw Components
-            drawArrow(ctx, cx, cy, endX, cy, '#3b82f6', 4); // Fx (i)
-            drawArrow(ctx, cx, cy, cx, endY, '#10b981', 4); // Fy (j)
-
-            // Dashed Projections
-            ctx.setLineDash([5, 5]); ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(endX, cy); ctx.lineTo(endX, endY); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(cx, endY); ctx.lineTo(endX, endY); ctx.stroke();
-            ctx.setLineDash([]);
-
-            // Resultant Vector
-            drawArrow(ctx, cx, cy, endX, endY, '#ef4444', 4);
-
-            // Angle Arc
-            ctx.beginPath(); ctx.arc(cx, cy, 30, 0, -angleRad, true);
-            ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2; ctx.stroke();
-
-            // Center Point
-            ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fillStyle = '#0f172a'; ctx.fill();
-        }
-
-        function drawArrow(ctx, fromx, fromy, tox, toy, color, width) {
-            if (Math.abs(tox - fromx) < 0.1 && Math.abs(toy - fromy) < 0.1) return;
-            const headlen = 10;
-            const angle = Math.atan2(toy - fromy, tox - fromx);
-            ctx.beginPath(); ctx.moveTo(fromx, fromy); ctx.lineTo(tox, toy);
-            ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
-
-            ctx.beginPath();
-            ctx.moveTo(tox, toy);
-            ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
-            ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
-            ctx.lineTo(tox, toy);
-            ctx.fillStyle = color; ctx.fill();
-        }
-
-        document.getElementById('slider-angle').addEventListener('input', drawUnitVector);
-        document.getElementById('slider-mag').addEventListener('input', drawUnitVector);
-
-        // ==========================================
-        // 4. CIRCUITOS (Vanilla Canvas Drawing)
-        // ==========================================
-        function drawCircuitDiagram() {
-            const canvas = document.getElementById('circuitCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            ctx.strokeStyle = '#1e293b';
-            ctx.lineWidth = 3;
-
-            // Box Coordinates
-            const x1 = 50, y1 = 50, x2 = 250, y2 = 250;
-
-            // Left Wire & AC Source
-            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1, (y1 + y2) / 2 - 20); ctx.stroke();
-            ctx.beginPath(); ctx.arc(x1, (y1 + y2) / 2, 20, 0, Math.PI * 2); ctx.stroke(); // Source circle
-            ctx.beginPath(); ctx.moveTo(x1 - 10, (y1 + y2) / 2); ctx.bezierCurveTo(x1 - 5, (y1 + y2) / 2 - 15, x1 + 5, (y1 + y2) / 2 + 15, x1 + 10, (y1 + y2) / 2); ctx.stroke(); // Sine wave
-            ctx.beginPath(); ctx.moveTo(x1, (y1 + y2) / 2 + 20); ctx.lineTo(x1, y2); ctx.stroke();
-            ctx.fillStyle = '#000'; ctx.font = '14px Arial font-bold'; ctx.fillText('V(t)', x1 - 40, (y1 + y2) / 2 + 5);
-
-            // Top Wire & Resistor (ZigZag)
-            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1 + 60, y1); ctx.stroke();
-            let rx = x1 + 60;
-            ctx.beginPath(); ctx.moveTo(rx, y1);
-            for (let i = 0; i < 4; i++) {
-                rx += 10; ctx.lineTo(rx, y1 - 15);
-                rx += 10; ctx.lineTo(rx, y1 + 15);
-            }
-            rx += 10; ctx.lineTo(rx, y1); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(rx, y1); ctx.lineTo(x2, y1); ctx.stroke();
-            ctx.fillText('R', (x1 + x2) / 2 - 5, y1 - 25);
-
-            // Right Wire & Inductor (Loops simulated via arcs)
-            ctx.beginPath(); ctx.moveTo(x2, y1); ctx.lineTo(x2, y1 + 60); ctx.stroke();
-            let ly = y1 + 60;
-            for (let i = 0; i < 4; i++) {
-                ctx.beginPath(); ctx.arc(x2, ly + 10, 10, -Math.PI / 2, Math.PI / 2, true); ctx.stroke();
-                ly += 20;
-            }
-            ctx.beginPath(); ctx.moveTo(x2, ly); ctx.lineTo(x2, y2); ctx.stroke();
-            ctx.fillText('L', x2 + 20, (y1 + y2) / 2);
-
-            // Bottom Wire & Capacitor (Parallel lines)
-            ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo((x1 + x2) / 2 + 10, y2); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo((x1 + x2) / 2 + 10, y2 - 15); ctx.lineTo((x1 + x2) / 2 + 10, y2 + 15); ctx.stroke(); // Cap plate 1
-            ctx.beginPath(); ctx.moveTo((x1 + x2) / 2 - 10, y2 - 15); ctx.lineTo((x1 + x2) / 2 - 10, y2 + 15); ctx.stroke(); // Cap plate 2
-            ctx.beginPath(); ctx.moveTo((x1 + x2) / 2 - 10, y2); ctx.lineTo(x1, y2); ctx.stroke();
-            ctx.fillText('C', (x1 + x2) / 2 - 5, y2 + 30);
-        }
-
-        // Initialize App
-        window.addEventListener('DOMContentLoaded', () => {
-            renderTable('all');
-            initChart();
-            document.querySelector('[data-filter="all"]').classList.add('bg-slate-900', 'text-white');
-        });
-    </script>
 </body>
-
 </html>

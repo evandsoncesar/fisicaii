@@ -1,0 +1,209 @@
+/* ==========================================
+   Dossiê Tático de Finais — Design System
+   Sr. Evandson | Eng. Computação | Física III
+   ========================================== */
+
+/* --- Base --- */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+
+/* --- Top Bar --- */
+.top-bar {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(71, 85, 105, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.back-link {
+    transition: transform 0.2s;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.back-link:hover {
+    transform: translateX(-4px);
+    color: #ffffff;
+}
+
+/* --- Chapter Headers --- */
+.chapter-header {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.chapter-header::before {
+    content: attr(data-chapter);
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    font-size: 8rem;
+    font-weight: 900;
+    opacity: 0.06;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* --- Formula Cards --- */
+.formula-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: #1e293b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.formula-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.formula-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    padding: 0.85rem 1rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    margin: 0.75rem 0;
+    letter-spacing: -0.02em;
+}
+
+.formula-hero {
+    background: linear-gradient(135deg, #312e81, #4338ca);
+    color: white;
+    border: none;
+}
+.formula-hero .formula-display {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.var-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* --- f-box (older style, kept for compat) --- */
+.f-box {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    color: #1e293b;
+}
+.f-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.f-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+.f-math {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: #f1f5f9;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Images --- */
+.diagram-img {
+    border-radius: 0.75rem;
+    border: 2px solid rgba(226, 232, 240, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.diagram-img:hover {
+    transform: scale(1.02);
+}
+
+/* --- Canvas Wrapper --- */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 2px solid #e2e8f0;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* --- Animations --- */
+.section-animate {
+    animation: slideUp 0.5s ease-out forwards;
+}
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Unit vectors --- */
+.unit-i { color: #3b82f6; font-weight: 900; }
+.unit-j { color: #10b981; font-weight: 900; }
+
+/* --- Sidebar --- */
+.sidebar-link {
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+.sidebar-link:hover, .sidebar-link.active {
+    border-left-color: #6366f1;
+    background: rgba(99, 102, 241, 0.1);
+    color: #a5b4fc;
+}
+
+/* --- Tip/Alert Boxes --- */
+.tip-box {
+    border-radius: 0.75rem;
+    padding: 1rem;
+    font-size: 0.8125rem;
+}

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Vetorial — Dossiê Tático | Sr. Evandson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased">
+
+    <header class="top-bar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <a href="index.html" class="back-link"><span class="text-lg">&larr;</span> Voltar ao Dossiê</a>
+                <div class="text-right">
+                    <h1 class="text-sm font-bold text-white">Cálculo Vetorial</h1>
+                    <p class="text-xs text-slate-500">Decomposição, Quadrantes &amp; Produtos</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- SEÇÃO 1: Decomposição de Vetores      -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-indigo-600 to-blue-600" data-chapter="î ĵ">
+                <p class="text-xs font-bold uppercase tracking-widest text-indigo-200 mb-1">Fundamento #1</p>
+                <h2 class="text-2xl font-black">Decomposição de Vetores (î e ĵ)</h2>
+                <p class="text-indigo-100 text-sm mt-2">O maior erro em provas é errar o sinal. A regra é simples: <strong>Cosseno = X (deitado)</strong>, <strong>Seno = Y (em pé)</strong>.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <!-- Interactive Canvas -->
+                <div class="formula-card space-y-6">
+                    <div class="f-box">
+                        <div class="f-title text-indigo-600">A Forma Universal do Vetor Resultante</div>
+                        <div class="formula-display text-indigo-900">F&#8407; = |F|&middot;cos(&theta;) <span class="unit-i">&icirc;</span> + |F|&middot;sen(&theta;) <span class="unit-j">&jcirc;</span></div>
+                        <p class="text-sm text-slate-600 text-center mt-2">Sendo &theta; o ângulo partindo do eixo X positivo no sentido anti-horário.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="block text-sm font-bold text-slate-700">Módulo da Força: <span id="val-mag" class="text-indigo-600">100</span></label>
+                        <input type="range" id="slider-mag" min="10" max="200" value="100" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+
+                        <label class="block text-sm font-bold text-slate-700">Ângulo (&theta;): <span id="val-angle" class="text-rose-600">45</span>&deg;</label>
+                        <input type="range" id="slider-angle" min="0" max="360" value="45" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded-xl text-center">
+                        <p class="text-slate-400 text-xs uppercase tracking-wider mb-2">Resposta na Prova</p>
+                        <p class="text-2xl font-bold text-white font-mono" id="vector-output">F&#8407; = 70.7 <span class="unit-i">&icirc;</span> + 70.7 <span class="unit-j">&jcirc;</span></p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="canvas-wrapper">
+                        <canvas id="vectorCanvas" width="400" height="400" class="w-full h-full block rounded-xl"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 mt-3">Observe os sinais de &icirc; e &jcirc; a mudarem conforme passa pelos 4 quadrantes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- SEÇÃO 2: Os 4 Quadrantes              -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-violet-600 to-purple-600" data-chapter="Q">
+                <p class="text-xs font-bold uppercase tracking-widest text-violet-200 mb-1">Fundamento #2</p>
+                <h2 class="text-2xl font-black">Os 4 Quadrantes &mdash; Sinais de cos e sen</h2>
+                <p class="text-violet-100 text-sm mt-2">Memorize: <strong>"Todos Sabem Tratar Com"</strong> &mdash; cada palavra indica quais funções são <strong>positivas</strong> no quadrante.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="flex justify-center">
+                    <img src="img/quadrantes_sinais.png" alt="Diagrama dos 4 quadrantes com sinais de cos e sen" class="diagram-img w-full max-w-md">
+                </div>
+
+                <div class="space-y-4">
+                    <div class="formula-card border-l-4 border-blue-400">
+                        <h3 class="font-bold text-blue-800 mb-2">1&ordm; Quadrante (0&deg; — 90&deg;)</h3>
+                        <p class="text-sm text-slate-600"><strong>"Todos"</strong> &mdash; cos(+), sen(+). <span class="unit-i">&icirc;</span> positivo, <span class="unit-j">&jcirc;</span> positivo.</p>
+                        <p class="text-xs text-slate-500 mt-1">Exemplo: &theta;=30&deg; &rarr; F&#8407; = F&middot;cos30&deg; <span class="unit-i">&icirc;</span> + F&middot;sen30&deg; <span class="unit-j">&jcirc;</span></p>
+                    </div>
+                    <div class="formula-card border-l-4 border-green-400">
+                        <h3 class="font-bold text-green-800 mb-2">2&ordm; Quadrante (90&deg; — 180&deg;)</h3>
+                        <p class="text-sm text-slate-600"><strong>"Sabem"</strong> &mdash; <strong>Seno</strong> positivo, cos negativo. <span class="unit-i">&icirc;</span> negativo, <span class="unit-j">&jcirc;</span> positivo.</p>
+                        <p class="text-xs text-slate-500 mt-1">Exemplo: &theta;=120&deg; &rarr; Fx &lt; 0, Fy &gt; 0</p>
+                    </div>
+                    <div class="formula-card border-l-4 border-orange-400">
+                        <h3 class="font-bold text-orange-800 mb-2">3&ordm; Quadrante (180&deg; — 270&deg;)</h3>
+                        <p class="text-sm text-slate-600"><strong>"Tratar"</strong> &mdash; <strong>Tangente</strong> positiva (cos e sen ambos negativos). <span class="unit-i">&icirc;</span> negativo, <span class="unit-j">&jcirc;</span> negativo.</p>
+                    </div>
+                    <div class="formula-card border-l-4 border-purple-400">
+                        <h3 class="font-bold text-purple-800 mb-2">4&ordm; Quadrante (270&deg; — 360&deg;)</h3>
+                        <p class="text-sm text-slate-600"><strong>"Com"</strong> &mdash; <strong>Cosseno</strong> positivo, sen negativo. <span class="unit-i">&icirc;</span> positivo, <span class="unit-j">&jcirc;</span> negativo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- SEÇÃO 3: Ângulos Notáveis             -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-cyan-600 to-teal-600" data-chapter="&theta;">
+                <p class="text-xs font-bold uppercase tracking-widest text-cyan-200 mb-1">Referência Rápida</p>
+                <h2 class="text-2xl font-black">Tabela de Ângulos Notáveis</h2>
+                <p class="text-cyan-100 text-sm mt-2">Decore esta tabela &mdash; ela aparece em praticamente todas as questões de decomposição vetorial.</p>
+            </div>
+
+            <div class="formula-card overflow-x-auto">
+                <table class="w-full text-center">
+                    <thead>
+                        <tr class="bg-slate-50 text-xs uppercase text-slate-500">
+                            <th class="px-4 py-3 font-bold">&theta;</th>
+                            <th class="px-4 py-3 font-bold">0&deg;</th>
+                            <th class="px-4 py-3 font-bold">30&deg;</th>
+                            <th class="px-4 py-3 font-bold">45&deg;</th>
+                            <th class="px-4 py-3 font-bold">60&deg;</th>
+                            <th class="px-4 py-3 font-bold">90&deg;</th>
+                            <th class="px-4 py-3 font-bold">180&deg;</th>
+                            <th class="px-4 py-3 font-bold">270&deg;</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm font-mono divide-y divide-slate-100">
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-blue-600">cos(&theta;)</td>
+                            <td class="px-4 py-3">1</td>
+                            <td class="px-4 py-3">&radic;3/2</td>
+                            <td class="px-4 py-3">&radic;2/2</td>
+                            <td class="px-4 py-3">1/2</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">0</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">&minus;1</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-green-600">sen(&theta;)</td>
+                            <td class="px-4 py-3">0</td>
+                            <td class="px-4 py-3">1/2</td>
+                            <td class="px-4 py-3">&radic;2/2</td>
+                            <td class="px-4 py-3">&radic;3/2</td>
+                            <td class="px-4 py-3 font-bold">1</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">0</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">&minus;1</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="px-4 py-3 font-bold text-amber-600">tan(&theta;)</td>
+                            <td class="px-4 py-3">0</td>
+                            <td class="px-4 py-3">&radic;3/3</td>
+                            <td class="px-4 py-3">1</td>
+                            <td class="px-4 py-3">&radic;3</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">&infin;</td>
+                            <td class="px-4 py-3">0</td>
+                            <td class="px-4 py-3 text-red-500 font-bold">&infin;</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-slate-500">Decimal cos</td>
+                            <td class="px-4 py-3 text-xs">1.000</td>
+                            <td class="px-4 py-3 text-xs">0.866</td>
+                            <td class="px-4 py-3 text-xs">0.707</td>
+                            <td class="px-4 py-3 text-xs">0.500</td>
+                            <td class="px-4 py-3 text-xs">0.000</td>
+                            <td class="px-4 py-3 text-xs">&minus;1.000</td>
+                            <td class="px-4 py-3 text-xs">0.000</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="px-4 py-3 font-bold text-slate-500">Decimal sen</td>
+                            <td class="px-4 py-3 text-xs">0.000</td>
+                            <td class="px-4 py-3 text-xs">0.500</td>
+                            <td class="px-4 py-3 text-xs">0.707</td>
+                            <td class="px-4 py-3 text-xs">0.866</td>
+                            <td class="px-4 py-3 text-xs">1.000</td>
+                            <td class="px-4 py-3 text-xs">0.000</td>
+                            <td class="px-4 py-3 text-xs">&minus;1.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <p class="text-xs text-amber-800"><strong>💡 Truque de memorização:</strong> Para sen, a sequência 0&deg; a 90&deg; é <strong>&radic;0/2, &radic;1/2, &radic;2/2, &radic;3/2, &radic;4/2</strong>. Para cos é o inverso!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- SEÇÃO 4: Produto Escalar e Vetorial   -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-rose-600 to-pink-600" data-chapter="&times;">
+                <p class="text-xs font-bold uppercase tracking-widest text-rose-200 mb-1">Operações Vetoriais</p>
+                <h2 class="text-2xl font-black">Produto Escalar (&middot;) vs Produto Vetorial (&times;)</h2>
+                <p class="text-rose-100 text-sm mt-2">Saber quando usar cada um é a diferença entre acertar e errar a questão.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Produto Escalar -->
+                <div class="formula-card space-y-4">
+                    <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+                        <p class="text-xs font-bold uppercase text-blue-600 mb-1">Produto Escalar (Dot Product)</p>
+                        <p class="text-xs text-blue-800">Resultado: um <strong>NÚMERO</strong> (escalar, sem direção)</p>
+                    </div>
+                    <div class="formula-display text-blue-900">A&#8407; &middot; B&#8407; = |A| &middot; |B| &middot; cos(&theta;)</div>
+                    <div class="formula-display text-blue-900 text-base">A&#8407; &middot; B&#8407; = A<sub>x</sub>B<sub>x</sub> + A<sub>y</sub>B<sub>y</sub> + A<sub>z</sub>B<sub>z</sub></div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl text-sm space-y-2">
+                        <h4 class="text-blue-400 font-bold uppercase text-xs">Onde aparece na Física III:</h4>
+                        <ul class="space-y-1 text-slate-300">
+                            <li>&bull; <strong>Fluxo Elétrico:</strong> &Phi; = E&#8407; &middot; dA&#8407;</li>
+                            <li>&bull; <strong>Trabalho:</strong> W = F&#8407; &middot; d&#8407;</li>
+                            <li>&bull; <strong>Potência:</strong> P = F&#8407; &middot; v&#8407;</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                        <p class="text-xs text-blue-800"><strong>💡 Macete:</strong> Se &theta; = 90&deg;, cos(90&deg;) = 0, logo A&#8407;&middot;B&#8407; = 0. Vetores perpendiculares têm produto escalar <strong>zero</strong>!</p>
+                    </div>
+                </div>
+
+                <!-- Produto Vetorial -->
+                <div class="formula-card space-y-4">
+                    <div class="bg-emerald-50 rounded-lg p-3 border border-emerald-200">
+                        <p class="text-xs font-bold uppercase text-emerald-600 mb-1">Produto Vetorial (Cross Product)</p>
+                        <p class="text-xs text-emerald-800">Resultado: um <strong>VETOR</strong> (perpendicular aos dois originais)</p>
+                    </div>
+                    <div class="formula-display text-emerald-900">|A&#8407; &times; B&#8407;| = |A| &middot; |B| &middot; sen(&theta;)</div>
+                    <div class="formula-display text-emerald-900 text-xs" style="line-height: 1.8;">
+                        A&#8407;&times;B&#8407; = (A<sub>y</sub>B<sub>z</sub>&minus;A<sub>z</sub>B<sub>y</sub>)&icirc; + (A<sub>z</sub>B<sub>x</sub>&minus;A<sub>x</sub>B<sub>z</sub>)&jcirc; + (A<sub>x</sub>B<sub>y</sub>&minus;A<sub>y</sub>B<sub>x</sub>)k&#770;
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-4 rounded-xl text-sm space-y-2">
+                        <h4 class="text-emerald-400 font-bold uppercase text-xs">Onde aparece na Física III:</h4>
+                        <ul class="space-y-1 text-slate-300">
+                            <li>&bull; <strong>Força Magnética:</strong> F&#8407; = q&middot;v&#8407; &times; B&#8407;</li>
+                            <li>&bull; <strong>Biot-Savart:</strong> dB&#8407; &prop; ds&#8407; &times; r&#770;</li>
+                            <li>&bull; <strong>Torque:</strong> &tau;&#8407; = r&#8407; &times; F&#8407;</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+                        <p class="text-xs text-emerald-800"><strong>💡 Macete:</strong> Se &theta; = 0&deg; ou 180&deg;, sen = 0, logo A&#8407;&times;B&#8407; = 0&#8407;. Vetores paralelos têm produto vetorial <strong>nulo</strong>!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross Product Image -->
+            <div class="flex justify-center">
+                <img src="img/produto_vetorial.png" alt="Produto vetorial com regra da mão direita" class="diagram-img w-full max-w-md">
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="formula-card overflow-x-auto">
+                <h3 class="font-bold text-slate-900 mb-4">Comparação Rápida</h3>
+                <table class="w-full text-sm text-center">
+                    <thead>
+                        <tr class="bg-slate-50 text-xs uppercase text-slate-500">
+                            <th class="px-4 py-3">Propriedade</th>
+                            <th class="px-4 py-3 text-blue-600">Escalar (&middot;)</th>
+                            <th class="px-4 py-3 text-emerald-600">Vetorial (&times;)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td class="px-4 py-3 font-medium">Resultado</td><td class="px-4 py-3">Número</td><td class="px-4 py-3">Vetor</td></tr>
+                        <tr><td class="px-4 py-3 font-medium">Função trigonométrica</td><td class="px-4 py-3 font-mono text-blue-600">cos(&theta;)</td><td class="px-4 py-3 font-mono text-emerald-600">sen(&theta;)</td></tr>
+                        <tr><td class="px-4 py-3 font-medium">= 0 quando</td><td class="px-4 py-3">Perpendiculares (90&deg;)</td><td class="px-4 py-3">Paralelos (0&deg;/180&deg;)</td></tr>
+                        <tr><td class="px-4 py-3 font-medium">Máximo quando</td><td class="px-4 py-3">Paralelos (0&deg;)</td><td class="px-4 py-3">Perpendiculares (90&deg;)</td></tr>
+                        <tr><td class="px-4 py-3 font-medium">Comutativo?</td><td class="px-4 py-3 text-green-600 font-bold">Sim</td><td class="px-4 py-3 text-red-600 font-bold">Não! A&times;B = &minus;B&times;A</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ═════════════════════════════════════ -->
+        <!-- SEÇÃO 5: Coordenadas                  -->
+        <!-- ═════════════════════════════════════ -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-amber-600 to-orange-600" data-chapter="r&#770;">
+                <p class="text-xs font-bold uppercase tracking-widest text-amber-200 mb-1">Sistemas de Coordenadas</p>
+                <h2 class="text-2xl font-black">Cartesianas vs Cilíndricas &mdash; Quando Usar Cada</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="formula-card">
+                    <h3 class="font-bold text-blue-900 mb-3">Cartesianas (x, y, z)</h3>
+                    <div class="formula-display text-base text-blue-900">r&#8407; = x&middot;&icirc; + y&middot;&jcirc; + z&middot;k&#770;</div>
+                    <div class="bg-blue-50 p-3 rounded-lg mt-3">
+                        <p class="text-xs text-blue-800 font-bold mb-1">Use quando:</p>
+                        <ul class="text-xs text-blue-700 space-y-1">
+                            <li>&bull; Planos infinitos</li>
+                            <li>&bull; Problemas com simetria retangular</li>
+                            <li>&bull; Decomposição de forças e campos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h3 class="font-bold text-emerald-900 mb-3">Cilíndricas (r, &phi;, z)</h3>
+                    <div class="formula-display text-base text-emerald-900">r&#8407; = r&middot;r&#770; + z&middot;z&#770;</div>
+                    <div class="bg-emerald-50 p-3 rounded-lg mt-3">
+                        <p class="text-xs text-emerald-800 font-bold mb-1">Use quando:</p>
+                        <ul class="text-xs text-emerald-700 space-y-1">
+                            <li>&bull; Fios longos retos (Lei de Ampère)</li>
+                            <li>&bull; Cilindros carregados (Lei de Gauss)</li>
+                            <li>&bull; Qualquer simetria com eixo central</li>
+                        </ul>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg mt-3">
+                        <p class="text-xs text-amber-800"><strong>⚠️ Cuidado:</strong> r&#770; (versor radial) <strong>muda de direção</strong> dependendo do ponto! Não é fixo como &icirc;.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-700 pt-8 pb-12 text-center">
+            <a href="index.html" class="inline-block px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-500 transition-colors">&larr; Voltar ao Painel Principal</a>
+        </footer>
+
+    </main>
+
+    <script>
+        // ==========================================
+        // Interactive Vector Canvas
+        // ==========================================
+        function drawUnitVector() {
+            const canvas = document.getElementById('vectorCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const mag = parseFloat(document.getElementById('slider-mag').value);
+            const angleDeg = parseFloat(document.getElementById('slider-angle').value);
+
+            document.getElementById('val-mag').innerText = mag;
+            document.getElementById('val-angle').innerText = angleDeg;
+
+            const angleRad = (angleDeg * Math.PI) / 180;
+            const fx = mag * Math.cos(angleRad);
+            const fy = mag * Math.sin(angleRad);
+
+            const signY = fy >= 0 ? '+' : '-';
+            document.getElementById('vector-output').innerHTML = `F&#8407; = ${fx.toFixed(1)} <span class="unit-i">&icirc;</span> ${signY} ${Math.abs(fy).toFixed(1)} <span class="unit-j">&jcirc;</span>`;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cx = 200, cy = 200, scale = 1.2;
+
+            // Grid
+            ctx.strokeStyle = '#f1f5f9'; ctx.lineWidth = 1;
+            for (let i = 0; i <= 400; i += 40) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 400); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(400, i); ctx.stroke();
+            }
+
+            // Quadrant colors
+            ctx.globalAlpha = 0.06;
+            ctx.fillStyle = '#3b82f6'; ctx.fillRect(cx, 0, 200, cy); // Q1
+            ctx.fillStyle = '#10b981'; ctx.fillRect(0, 0, cx, cy); // Q2
+            ctx.fillStyle = '#f59e0b'; ctx.fillRect(0, cy, cx, 200); // Q3
+            ctx.fillStyle = '#8b5cf6'; ctx.fillRect(cx, cy, 200, 200); // Q4
+            ctx.globalAlpha = 1;
+
+            // Axes
+            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(400, cy); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, 400); ctx.stroke();
+
+            ctx.fillStyle = '#64748b'; ctx.font = 'bold 13px Inter, Arial';
+            ctx.fillText('+X (î)', 345, cy - 10);
+            ctx.fillText('+Y (ĵ)', cx + 10, 18);
+            ctx.fillText('Q1', 340, 30); ctx.fillText('Q2', 15, 30);
+            ctx.fillText('Q3', 15, 390); ctx.fillText('Q4', 340, 390);
+
+            const endX = cx + (fx * scale), endY = cy - (fy * scale);
+
+            // Components
+            drawArrow(ctx, cx, cy, endX, cy, '#3b82f6', 4);
+            drawArrow(ctx, cx, cy, cx, endY, '#10b981', 4);
+
+            // Dashed projections
+            ctx.setLineDash([5, 5]); ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(endX, cy); ctx.lineTo(endX, endY); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(cx, endY); ctx.lineTo(endX, endY); ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Resultant
+            drawArrow(ctx, cx, cy, endX, endY, '#ef4444', 4);
+
+            // Angle arc
+            ctx.beginPath(); ctx.arc(cx, cy, 30, 0, -angleRad, true);
+            ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2; ctx.stroke();
+
+            // Center
+            ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fillStyle = '#0f172a'; ctx.fill();
+        }
+
+        function drawArrow(ctx, fromx, fromy, tox, toy, color, width) {
+            if (Math.abs(tox - fromx) < 0.1 && Math.abs(toy - fromy) < 0.1) return;
+            const headlen = 10;
+            const angle = Math.atan2(toy - fromy, tox - fromx);
+            ctx.beginPath(); ctx.moveTo(fromx, fromy); ctx.lineTo(tox, toy);
+            ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(tox, toy);
+            ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.lineTo(tox, toy);
+            ctx.fillStyle = color; ctx.fill();
+        }
+
+        document.getElementById('slider-angle').addEventListener('input', drawUnitVector);
+        document.getElementById('slider-mag').addEventListener('input', drawUnitVector);
+
+        window.addEventListener('DOMContentLoaded', drawUnitVector);
+    </script>
+</body>
+</html>
