@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Preditiva de Exames - Sr. Evandson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #f8fafc; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+
+        .filter-btn.active {
+            background-color: #1e293b;
+            color: #ffffff;
+            border-color: #1e293b;
+        }
+        
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cat-eletro { border-left: 4px solid #6366f1; }
+        .cat-mag { border-left: 4px solid #f43f5e; }
+        .cat-inducao { border-left: 4px solid #10b981; }
+        .cat-circ { border-left: 4px solid #f59e0b; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-500 rounded flex items-center justify-center font-bold text-xl tracking-tighter">
+                        Q&bull;A
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold tracking-tight">Mapeamento Tático de Finais</h1>
+                        <p class="text-xs text-slate-400 font-medium">Relatório Analítico Confidencial - Sr. Evandson</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-8">
+
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2">Padrões de Avaliação (Últimos 5 Semestres)</h2>
+            <p class="text-slate-600 mb-6">
+                Analisámos o apanhado das provas que nos enviou. A conclusão é clara: <strong>o seu professor segue uma estrutura extremamente previsível.</strong> O gráfico abaixo agrupa os temas específicos em quatro grandes categorias físicas para revelar a anatomia exata do exame.
+            </p>
+            
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+            
+            <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="flex items-center gap-2 p-2 rounded bg-indigo-50 text-indigo-800 font-medium">
+                    <div class="w-3 h-3 rounded-full bg-indigo-500"></div> Eletrostática & Gauss
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded bg-rose-50 text-rose-800 font-medium">
+                    <div class="w-3 h-3 rounded-full bg-rose-500"></div> Magnetismo (Biot-Savart/Força)
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded bg-emerald-50 text-emerald-800 font-medium">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div> Indução (Faraday/Potência)
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded bg-amber-50 text-amber-800 font-medium">
+                    <div class="w-3 h-3 rounded-full bg-amber-500"></div> Circuitos (AC/DC)
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <section class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 class="text-xl font-bold text-slate-900">Matriz Histórica Detalhada</h2>
+                    <div class="flex flex-wrap gap-2" id="filter-controls">
+                        <button class="filter-btn active px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors" data-filter="all">Todas as Questões</button>
+                        <button class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors" data-filter="q1">Q1</button>
+                        <button class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors" data-filter="q2">Q2</button>
+                        <button class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors" data-filter="q3">Q3</button>
+                        <button class="filter-btn px-3 py-1.5 text-sm font-medium rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors" data-filter="q4">Q4</button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 font-bold">Semestre</th>
+                                <th scope="col" class="px-4 py-3 font-bold">Questão 1</th>
+                                <th scope="col" class="px-4 py-3 font-bold">Questão 2</th>
+                                <th scope="col" class="px-4 py-3 font-bold">Questão 3</th>
+                                <th scope="col" class="px-4 py-3 font-bold">Questão 4</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matrix-body" class="divide-y divide-slate-100">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 font-bold text-8xl pointer-events-none">&excl;</div>
+                    <h2 class="text-xl font-bold mb-4">Diretivas de Estudo (Prioridade Máxima)</h2>
+                    <p class="text-sm text-slate-300 mb-6">
+                        Com base na matriz, Sr. Evandson, se o seu tempo for limitado, o foco estratégico deve ser este:
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs shrink-0">Q1</div>
+                            <div>
+                                <h4 class="font-bold text-indigo-300">Garantido: Eletrostática & Gauss</h4>
+                                <p class="text-xs text-slate-400 mt-1">Apareceu em 5/5 provas. Foco total em Cilindros e Esferas com densidade de carga uniforme e NÃO uniforme (integrais).</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 w-6 h-6 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs shrink-0">Q4</div>
+                            <div>
+                                <h4 class="font-bold text-amber-300">Garantido: Circuitos AC</h4>
+                                <p class="text-xs text-slate-400 mt-1">Apareceu em 5/5 provas (RL ou RLC). Deve dominar fasores, cálculo de Impedância (Z), Frequência de Ressonância e ângulos de fase.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">Q3</div>
+                            <div>
+                                <h4 class="font-bold text-emerald-300">Alta Probabilidade: Indução</h4>
+                                <p class="text-xs text-slate-400 mt-1">Nos últimos dois semestres (2025.1 e 2025.2), a Q3 consolidou-se como "Corrente Induzida / Potência". Reveja a Lei de Faraday.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100">
+                    <h3 class="text-blue-900 font-bold mb-2 flex items-center gap-2">
+                        <span class="text-xl">&check;</span> Prontidão Atual
+                    </h3>
+                    <p class="text-sm text-blue-800">
+                        A boa notícia, Sr. Evandson, é que nas nossas sessões anteriores revimos detalhadamente a <strong>Lei de Gauss (Esferas)</strong>, a <strong>Lei de Faraday (Indução)</strong>, <strong>Biot-Savart (Fios)</strong> e os <strong>Circuitos RLC (Ressonância)</strong>. O senhor já cobriu, na prática, os tópicos que representam 100% desta avaliação. Mantenha a calma e confie nos seus cálculos.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const examData = [
+            { period: '2023.2', q1: { text: 'Campo Elétrico / Cilindro / Não Uniforme', cat: 'eletro' }, q2: { text: 'Circuito R', cat: 'circ' }, q3: { text: 'Circuito (R + B)', cat: 'circ' }, q4: { text: 'Circuito (RL)', cat: 'circ' } },
+            { period: '2024.1', q1: { text: 'Campo Elétrico / Dipolo', cat: 'eletro' }, q2: { text: 'Carga / Campo Elétrico', cat: 'eletro' }, q3: { text: 'Campo Magnético', cat: 'mag' }, q4: { text: 'Circuito (RLC)', cat: 'circ' } },
+            { period: '2024.2', q1: { text: 'Carga / Campo Elétrico / Esfera / Uniforme', cat: 'eletro' }, q2: { text: 'Momento Magnético / Torque', cat: 'mag' }, q3: { text: 'Campo Magnético 2 fios', cat: 'mag' }, q4: { text: 'Circuito (RLC)', cat: 'circ' } },
+            { period: '2025.1', q1: { text: 'Campo Elétrico / Fluxo', cat: 'eletro' }, q2: { text: 'Campo Magnético / [F/L]', cat: 'mag' }, q3: { text: 'Corrente induzida / Potência', cat: 'inducao' }, q4: { text: 'Circuito (RL)', cat: 'circ' } },
+            { period: '2025.2', q1: { text: 'Campo Elétrico / Esfera / Não Uniforme', cat: 'eletro' }, q2: { text: 'Circuito R', cat: 'circ' }, q3: { text: 'Corrente induzida / Potência', cat: 'inducao' }, q4: { text: 'Circuito (RLC)', cat: 'circ' } }
+        ];
+
+        function getCategoryStyle(cat) {
+            switch(cat) {
+                case 'eletro': return 'bg-indigo-50 text-indigo-700 font-medium cat-eletro';
+                case 'mag': return 'bg-rose-50 text-rose-700 font-medium cat-mag';
+                case 'inducao': return 'bg-emerald-50 text-emerald-700 font-medium cat-inducao';
+                case 'circ': return 'bg-amber-50 text-amber-800 font-medium cat-circ';
+                default: return 'bg-slate-50 text-slate-600';
+            }
+        }
+
+        function renderTable(filter) {
+            const tbody = document.getElementById('matrix-body');
+            tbody.innerHTML = '';
+
+            examData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors fade-in';
+                
+                let html = `<td class="px-4 py-4 font-bold text-slate-800 whitespace-nowrap">${row.period}</td>`;
+                
+                const questions = ['q1', 'q2', 'q3', 'q4'];
+                questions.forEach(q => {
+                    if (filter === 'all' || filter === q) {
+                        html += `
+                            <td class="px-4 py-4 min-w-[200px]">
+                                <div class="px-3 py-2 rounded text-xs ${getCategoryStyle(row[q].cat)} h-full shadow-sm">
+                                    ${row[q].text}
+                                </div>
+                            </td>`;
+                    } else if (filter !== 'all') {
+                        html += `<td class="px-4 py-4"><div class="text-slate-300 text-center">-</div></td>`;
+                    }
+                });
+
+                tr.innerHTML = html;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-slate-900', 'text-white'));
+                e.target.classList.add('active', 'bg-slate-900', 'text-white');
+                renderTable(e.target.dataset.filter);
+            });
+        });
+
+        function initChart() {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            
+            const countData = {
+                eletro: [5, 1, 0, 0],
+                mag: [0, 2, 2, 0],
+                inducao: [0, 0, 2, 0],
+                circ: [0, 2, 1, 5]
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Questão 1', 'Questão 2', 'Questão 3', 'Questão 4'],
+                    datasets: [
+                        { label: 'Eletrostática & Gauss', data: countData.eletro, backgroundColor: '#6366f1', stack: 'Stack 0' },
+                        { label: 'Magnetismo', data: countData.mag, backgroundColor: '#f43f5e', stack: 'Stack 0' },
+                        { label: 'Indução', data: countData.inducao, backgroundColor: '#10b981', stack: 'Stack 0' },
+                        { label: 'Circuitos (AC/DC)', data: countData.circ, backgroundColor: '#f59e0b', stack: 'Stack 0' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: { mode: 'index', intersect: false },
+                        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, padding: 20 } }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, title: { display: true, text: 'Nº de Aparições (Total 5)' }, max: 5, ticks: { stepSize: 1 } }
+                    },
+                    animation: { duration: 1000, easing: 'easeOutQuart' }
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTable('all');
+            initChart();
+            
+            const initialBtn = document.querySelector('[data-filter="all"]');
+            initialBtn.classList.add('bg-slate-900', 'text-white');
+        });
+    </script>
+</body>
+</html>
