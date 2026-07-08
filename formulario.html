@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Completo — Eletromagnetismo | Sr. Evandson</title>
+    <meta name="description" content="Formulário completo de Física III — Eletrostática, Gauss, Magnetismo, Indução e Circuitos AC/DC com explicações detalhadas de cada variável.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+
+        /* Chapter Section Headers */
+        .chapter-header {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: attr(data-chapter);
+            position: absolute;
+            right: -10px;
+            top: -20px;
+            font-size: 8rem;
+            font-weight: 900;
+            opacity: 0.06;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* Formula Cards */
+        .formula-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .formula-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .formula-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.35rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 0.85rem 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            margin: 0.75rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .var-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Sidebar Nav */
+        .sidebar-link {
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            border-left-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+            color: #a5b4fc;
+        }
+
+        /* Section fade-in */
+        .section-animate {
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+
+        /* Image containers */
+        .diagram-img {
+            border-radius: 0.75rem;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        .diagram-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Highlight important formula */
+        .formula-hero {
+            background: linear-gradient(135deg, #312e81, #4338ca);
+            color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: none;
+        }
+
+        .formula-hero .formula-display {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-link {
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            transform: translateX(-4px);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 font-sans antialiased">
+
+    <!-- Top Bar -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="back-link flex items-center gap-2 text-slate-400 hover:text-white text-sm font-medium">
+                        <span class="text-lg">&larr;</span> Voltar ao Dossiê
+                    </a>
+                </div>
+                <div class="text-right">
+                    <h1 class="text-sm font-bold text-white tracking-tight">Formulário Completo</h1>
+                    <p class="text-xs text-slate-500">Eletromagnetismo &mdash; Física III</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex gap-8">
+
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="hidden lg:block w-56 shrink-0">
+            <nav class="sticky top-20 space-y-1">
+                <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-3 px-3">Capítulos</p>
+                <a href="#cap1" class="sidebar-link active block px-3 py-2 text-sm text-slate-400 rounded-r">
+                    <span class="text-indigo-400 font-bold mr-1">1.</span> Eletrostática &amp; Gauss
+                </a>
+                <a href="#cap2" class="sidebar-link block px-3 py-2 text-sm text-slate-400 rounded-r">
+                    <span class="text-violet-400 font-bold mr-1">2.</span> Distribuições de Carga
+                </a>
+                <a href="#cap3" class="sidebar-link block px-3 py-2 text-sm text-slate-400 rounded-r">
+                    <span class="text-rose-400 font-bold mr-1">3.</span> Campos Magnéticos
+                </a>
+                <a href="#cap4" class="sidebar-link block px-3 py-2 text-sm text-slate-400 rounded-r">
+                    <span class="text-emerald-400 font-bold mr-1">4.</span> Indução
+                </a>
+                <div class="mt-6 pt-4 border-t border-slate-700">
+                    <p class="text-xs text-slate-600 px-3">Constantes</p>
+                    <div class="mt-2 px-3 space-y-1.5 text-xs font-mono text-slate-500">
+                        <p>&epsilon;<sub>0</sub> = 8,85&times;10<sup>&minus;12</sup> C&sup2;/N&middot;m&sup2;</p>
+                        <p>&mu;<sub>0</sub> = 4&pi;&times;10<sup>&minus;7</sup> T&middot;m/A</p>
+                        <p>k = 1/(4&pi;&epsilon;<sub>0</sub>) &asymp; 9&times;10<sup>9</sup></p>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 min-w-0 space-y-16">
+
+            <!-- Intro Banner -->
+            <div class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl p-6 md:p-8 text-white shadow-xl section-animate">
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-3">Anatomia de Cada Equação &mdash; Variável por Variável</h2>
+                <p class="text-indigo-100 max-w-2xl text-sm md:text-base leading-relaxed">
+                    É fundamental não apenas decorar, mas entender a <strong>"anatomia"</strong> de cada equação e o que cada letra representa.
+                    Muitas vezes, a banca tenta confundir o aluno usando variáveis ligeiramente diferentes.
+                    Aqui está o apanhado completo, traduzido para a linguagem de quem precisa resolver a prova.
+                </p>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CAPÍTULO 1: Eletrostática & Lei de Gauss -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="cap1" class="space-y-6 section-animate">
+                <div class="chapter-header bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg" data-chapter="01">
+                    <p class="text-xs font-bold uppercase tracking-widest text-indigo-200 mb-1">Capítulo 1</p>
+                    <h2 class="text-2xl font-black">Eletrostática &amp; Lei de Gauss</h2>
+                    <p class="text-indigo-100 text-sm mt-2">Foco: Cargas paradas gerando campo elétrico ao seu redor.</p>
+                </div>
+
+                <!-- Diagram -->
+                <div class="flex justify-center">
+                    <img src="img/gauss_esfera.png" alt="Superfície Gaussiana esférica com linhas de campo elétrico" class="diagram-img w-full max-w-md">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <!-- Fluxo Elétrico -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">Fluxo Elétrico (A Definição)</p>
+                        <div class="formula-display text-indigo-900">&Phi;<sub>E</sub> = &oint; E&#8407; &middot; dA&#8407;</div>
+                        <p class="text-sm text-slate-600 mb-3">Mede a "quantidade" de linhas de campo elétrico que atravessam e <strong>furam</strong> uma superfície específica.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-indigo-100 text-indigo-700">&Phi;<sub>E</sub></span> Fluxo elétrico (N&middot;m&sup2;/C)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-indigo-100 text-indigo-700">E&#8407;</span> Vetor do Campo Elétrico</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-indigo-100 text-indigo-700">dA&#8407;</span> Vetor área (perpendicular à superfície, apontando para fora)</p>
+                        </div>
+                    </div>
+
+                    <!-- Lei de Gauss -->
+                    <div class="formula-card formula-hero">
+                        <p class="text-xs font-bold uppercase tracking-wider text-indigo-200 mb-1">Lei de Gauss (A Fórmula Mãe) ⭐</p>
+                        <div class="formula-display">&oint; E&#8407; &middot; dA&#8407; = q<sub>env</sub> / &epsilon;<sub>0</sub></div>
+                        <p class="text-sm text-indigo-100 mb-3">Relaciona o fluxo total numa superfície fechada (imaginária) diretamente com a carga que está <strong>presa lá dentro</strong>. Salva a vida em geometrias simétricas.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-indigo-200"><span class="var-tag bg-white/20 text-white">q<sub>env</sub></span> Carga líquida envolvida pela superfície gaussiana (C)</p>
+                            <p class="text-xs text-indigo-200"><span class="var-tag bg-white/20 text-white">&epsilon;<sub>0</sub></span> Permissividade do vácuo (8,85 &times; 10<sup>&minus;12</sup> C&sup2;/N&middot;m&sup2;)</p>
+                        </div>
+                    </div>
+
+                    <!-- Campo de Carga Pontual -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Carga Pontual (Lei de Coulomb)</p>
+                        <div class="formula-display text-blue-900">E = (1 / 4&pi;&epsilon;<sub>0</sub>) &middot; |q| / r&sup2;</div>
+                        <p class="text-sm text-slate-600 mb-3">Calcula a força do campo gerado por uma única partícula. O campo enfraquece com o <strong>quadrado</strong> da distância.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">q</span> Carga da partícula (C)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">r</span> Distância da partícula até o ponto de interesse (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Fio Longo Infinito -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Fio Longo Infinito (Simetria Cilíndrica)</p>
+                        <div class="formula-display text-blue-900">E = &lambda; / (2&pi;&epsilon;<sub>0</sub> r)</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo gerado por um fio reto e comprido. Note que aqui o campo cai com <strong>r</strong> (e não com r&sup2;).</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">&lambda;</span> Densidade linear de carga (Carga / comprimento, em C/m)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">r</span> Distância perpendicular do fio até o ponto (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Plano Infinito -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-cyan-600 mb-1">Plano Infinito (Não Condutor)</p>
+                        <div class="formula-display text-cyan-900">E = &sigma; / (2&epsilon;<sub>0</sub>)</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo gerado por uma chapa gigante de carga. O campo é <strong>uniforme</strong>; não importa a distância r, ele tem sempre o mesmo valor!</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-cyan-100 text-cyan-700">&sigma;</span> Densidade superficial de carga (Carga / área, em C/m&sup2;)</p>
+                        </div>
+                    </div>
+
+                    <!-- Superfície de Condutor -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-cyan-600 mb-1">Superfície de um Condutor (Metal em Equilíbrio)</p>
+                        <div class="formula-display text-cyan-900">E = &sigma; / &epsilon;<sub>0</sub></div>
+                        <p class="text-sm text-slate-600 mb-3">Campo logo acima da superfície de um pedaço de metal. <strong>O campo dentro do metal é zero.</strong></p>
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-2">
+                            <p class="text-xs text-amber-800"><strong>⚠️ Atenção:</strong> Compare com o Plano — a diferença é o fator 2. Metal não tem campo "por dentro", então toda a contribuição sai por um lado só.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CAPÍTULO 2: Distribuições de Carga      -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="cap2" class="space-y-6 section-animate">
+                <div class="chapter-header bg-gradient-to-r from-violet-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg" data-chapter="02">
+                    <p class="text-xs font-bold uppercase tracking-widest text-violet-200 mb-1">Capítulo 2</p>
+                    <h2 class="text-2xl font-black">Distribuições Específicas de Carga</h2>
+                    <p class="text-violet-100 text-sm mt-2">Foco: Fórmulas prontas para calcular o campo no <strong>eixo de simetria</strong> (geralmente chamado de eixo z) de formatos específicos.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                    <!-- Dipolo Elétrico -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-violet-600 mb-1">Dipolo Elétrico (no eixo z, muito longe)</p>
+                        <div class="formula-display text-violet-900">E = p / (2&pi;&epsilon;<sub>0</sub> z&sup3;)</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo gerado por duas cargas iguais e opostas (+q e &minus;q) separadas por uma pequena distância, visto de muito longe. Cai bruscamente com <strong>z&sup3;</strong>.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">p</span> Momento de dipolo: p = q &middot; d (C&middot;m)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">d</span> Distância entre as duas cargas</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">z</span> Distância do centro do dipolo (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Anel de Cargas -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-violet-600 mb-1">Anel de Cargas (no eixo central z)</p>
+                        <div class="formula-display text-violet-900 text-base">E = q&middot;z / (4&pi;&epsilon;<sub>0</sub>(z&sup2;+R&sup2;)<sup>3/2</sup>)</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo ao longo da linha que passa pelo centro de um anel. No centro exato (z=0), o campo é <strong>zero</strong> (as forças anulam-se).</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">q</span> Carga total espalhada no anel (C)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">R</span> Raio do anel (m)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">z</span> Distância do centro do anel (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Disco de Cargas -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-violet-600 mb-1">Disco de Cargas Maciço (no eixo z)</p>
+                        <div class="formula-display text-violet-900 text-base">E = (&sigma;/2&epsilon;<sub>0</sub>)(1 &minus; z/&radic;(z&sup2;+R&sup2;))</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo ao longo do eixo de um disco (como se fosse um CD cheio de carga).</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">&sigma;</span> Densidade superficial de carga do disco (C/m&sup2;)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">R</span> Raio do disco (m)</p>
+                        </div>
+                        <div class="bg-violet-50 border border-violet-200 rounded-lg p-3 mt-3">
+                            <p class="text-xs text-violet-800"><strong>💡 Dica:</strong> Quando R &rarr; &infin;, a fórmula converge para E = &sigma;/(2&epsilon;<sub>0</sub>), que é exatamente o plano infinito!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CAPÍTULO 3: Campos Magnéticos           -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="cap3" class="space-y-6 section-animate">
+                <div class="chapter-header bg-gradient-to-r from-rose-500 to-pink-600 rounded-2xl p-6 text-white shadow-lg" data-chapter="03">
+                    <p class="text-xs font-bold uppercase tracking-widest text-rose-200 mb-1">Capítulo 3</p>
+                    <h2 class="text-2xl font-black">Campos Magnéticos &amp; Lei de Ampère</h2>
+                    <p class="text-rose-100 text-sm mt-2">Foco: Cargas em <strong>movimento</strong> (correntes) gerando campos magnéticos.</p>
+                </div>
+
+                <!-- Diagram Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex justify-center">
+                        <img src="img/biot_savart_fio.png" alt="Campo magnético ao redor de um fio com regra da mão direita" class="diagram-img w-full max-w-sm">
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="img/solenoide_toroide.png" alt="Solenoide e toroide com campo magnético" class="diagram-img w-full max-w-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <!-- Lei de Biot-Savart -->
+                    <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #881337, #be123c);">
+                        <p class="text-xs font-bold uppercase tracking-wider text-rose-200 mb-1">Lei de Biot-Savart (Força Bruta) ⭐</p>
+                        <div class="formula-display text-sm">dB&#8407; = (&mu;<sub>0</sub>&middot;i / 4&pi;) &middot; (ds&#8407; &times; r&#770;) / r&sup2;</div>
+                        <p class="text-sm text-rose-100 mb-3">A equação universal para calcular o campo magnético de <strong>qualquer formato de fio</strong>, cortando o fio em pedacinhos ds&#8407; e integrando.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-rose-200"><span class="var-tag bg-white/20 text-white">dB&#8407;</span> Pedacinho de campo magnético (Tesla, T)</p>
+                            <p class="text-xs text-rose-200"><span class="var-tag bg-white/20 text-white">&mu;<sub>0</sub></span> Permeabilidade do vácuo (4&pi;&times;10<sup>&minus;7</sup> T&middot;m/A)</p>
+                            <p class="text-xs text-rose-200"><span class="var-tag bg-white/20 text-white">i</span> Corrente elétrica (A)</p>
+                            <p class="text-xs text-rose-200"><span class="var-tag bg-white/20 text-white">ds&#8407;</span> Vetor do pequeno segmento de fio</p>
+                            <p class="text-xs text-rose-200"><span class="var-tag bg-white/20 text-white">r&#770;</span> Vetor unitário do fio para o ponto alvo</p>
+                        </div>
+                    </div>
+
+                    <!-- Lei de Ampère -->
+                    <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #881337, #be123c);">
+                        <p class="text-xs font-bold uppercase tracking-wider text-rose-200 mb-1">Lei de Ampère (O Caminho Fácil) ⭐</p>
+                        <div class="formula-display">&oint; B&#8407; &middot; ds&#8407; = &mu;<sub>0</sub> &middot; i<sub>env</sub></div>
+                        <p class="text-sm text-rose-100 mb-3">Permite achar o campo B de forma rápida em situações de <strong>alta simetria</strong> (fios retos, solenoides, toroides), fazendo um caminho fechado (Amperiana).</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-rose-200"><span class="var-tag bg-white/20 text-white">i<sub>env</sub></span> Corrente total que fura/atravessa a área do caminho fechado (A)</p>
+                        </div>
+                    </div>
+
+                    <!-- Fio Longo e Reto -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1">Fio Longo e Reto</p>
+                        <div class="formula-display text-rose-900">B = (&mu;<sub>0</sub> &middot; i) / (2&pi; r)</div>
+                        <p class="text-sm text-slate-600 mb-3">O módulo do campo magnético circulando ao redor de um fio infinito.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">r</span> Distância radial a partir do centro do fio (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Força entre Dois Fios -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1">Força entre Dois Fios Paralelos</p>
+                        <div class="formula-display text-rose-900">F/L = (&mu;<sub>0</sub> &middot; i<sub>1</sub> &middot; i<sub>2</sub>) / (2&pi; d)</div>
+                        <p class="text-sm text-slate-600 mb-3">Fios com correntes no <strong>mesmo sentido atraem-se</strong>; sentidos opostos <strong>repelem-se</strong>.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">F/L</span> Força por unidade de comprimento (N/m)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">i<sub>1</sub>, i<sub>2</sub></span> Corrente em cada fio (A)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">d</span> Distância separando os fios (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Espira Circular -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-pink-600 mb-1">Espira Circular (no centro exato)</p>
+                        <div class="formula-display text-pink-900">B = (&mu;<sub>0</sub> &middot; i) / (2R)</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo concentrado bem no meio de um anel de corrente. Se for <strong>meia espira</strong> (semicírculo), divida por 2.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">R</span> Raio da espira (m)</p>
+                        </div>
+                    </div>
+
+                    <!-- Solenoide -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-pink-600 mb-1">Solenoide Ideal (Bobina Longa)</p>
+                        <div class="formula-display text-pink-900">B = &mu;<sub>0</sub> &middot; n &middot; i</div>
+                        <p class="text-sm text-slate-600 mb-3">Campo magnético forte e <strong>uniforme</strong> no interior de uma bobina comprida.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">n</span> Densidade de espiras = N/L (espiras/metro)</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">N</span> Número total de voltas</p>
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">L</span> Comprimento do solenoide</p>
+                        </div>
+                    </div>
+
+                    <!-- Toroide -->
+                    <div class="formula-card md:col-span-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-pink-600 mb-1">Toroide (Bobina em formato de Donut)</p>
+                                <div class="formula-display text-pink-900">B = (&mu;<sub>0</sub> &middot; i &middot; N) / (2&pi; r)</div>
+                                <p class="text-sm text-slate-600 mb-3">Campo confinado dentro do núcleo de um toroide. O campo <strong>não é uniforme</strong> — varia dependendo se está mais perto da borda interna ou externa.</p>
+                                <div class="space-y-1.5">
+                                    <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">N</span> Número total de espiras</p>
+                                    <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">r</span> Raio (distância do centro do "donut" até o ponto dentro do tubo)</p>
+                                </div>
+                            </div>
+                            <div class="bg-rose-50 border border-rose-200 rounded-xl p-4">
+                                <h4 class="text-sm font-bold text-rose-800 mb-2">🧭 A Regra da Mão Direita</h4>
+                                <ul class="space-y-2 text-sm text-rose-700">
+                                    <li><strong>Polegar:</strong> Sentido da Corrente (i)</li>
+                                    <li><strong>Dedos a envolver:</strong> Sentido circular do Campo Magnético (B)</li>
+                                </ul>
+                                <p class="text-xs text-rose-600 mt-3 border-t border-rose-200 pt-2"><strong>Para o Produto Vetorial</strong> (ds&#8407; &times; r&#770;): aponte os dedos na direção de ds&#8407;, feche-os na direção de r&#770;; o polegar aponta na direção de dB&#8407;.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CAPÍTULO 4: Indução Eletromagnética     -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="cap4" class="space-y-6 section-animate">
+                <div class="chapter-header bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-6 text-white shadow-lg" data-chapter="04">
+                    <p class="text-xs font-bold uppercase tracking-widest text-emerald-200 mb-1">Capítulo 4</p>
+                    <h2 class="text-2xl font-black">Indução Eletromagnética</h2>
+                    <p class="text-emerald-100 text-sm mt-2">Foco: Como campos magnéticos que <strong>variam no tempo</strong> criam energia/voltagem.</p>
+                </div>
+
+                <!-- Diagram -->
+                <div class="flex justify-center">
+                    <img src="img/faraday_inducao.png" alt="Indução eletromagnética — barra em trilhos com campo magnético" class="diagram-img w-full max-w-md">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <!-- Fluxo Magnético -->
+                    <div class="formula-card">
+                        <p class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Fluxo Magnético</p>
+                        <div class="formula-display text-emerald-900">&Phi;<sub>B</sub> = &int; B&#8407; &middot; dA&#8407;</div>
+                        <p class="text-sm text-slate-600 mb-3">Mede a quantidade de campo magnético que passa por dentro de uma área (como uma espira).</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-slate-500"><span class="var-tag bg-emerald-100 text-emerald-700">&Phi;<sub>B</sub></span> Fluxo Magnético (Weber, Wb)</p>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mt-3">
+                            <p class="text-xs text-emerald-800"><strong>💡 Dica Prática:</strong> Se o campo for uniforme, a integral vira apenas <strong>B &middot; A &middot; cos(&theta;)</strong>, onde &theta; é o ângulo entre o campo e a normal da área.</p>
+                        </div>
+                    </div>
+
+                    <!-- Lei de Faraday e Lenz -->
+                    <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #065f46, #059669);">
+                        <p class="text-xs font-bold uppercase tracking-wider text-emerald-200 mb-1">Lei de Faraday e Lenz ⭐</p>
+                        <div class="formula-display">&epsilon; = &minus;N &middot; d&Phi;<sub>B</sub>/dt</div>
+                        <p class="text-sm text-emerald-100 mb-3">A equação principal! Para gerar tensão, o fluxo magnético tem que <strong>mudar</strong> (derivada &ne; 0). Fluxo constante = sem tensão.</p>
+                        <div class="space-y-1.5">
+                            <p class="text-xs text-emerald-200"><span class="var-tag bg-white/20 text-white">&epsilon;</span> Força Eletromotriz Induzida (Volts)</p>
+                            <p class="text-xs text-emerald-200"><span class="var-tag bg-white/20 text-white">N</span> Número de voltas (se for 1 espira, N=1)</p>
+                            <p class="text-xs text-emerald-200"><span class="var-tag bg-white/20 text-white">d&Phi;<sub>B</sub>/dt</span> Derivada do fluxo em relação ao tempo</p>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-3 mt-3 border border-white/20">
+                            <p class="text-xs text-emerald-100"><strong>Sinal (&minus;):</strong> Representação da Lei de Lenz — a tensão gerada sempre se <strong>opõe à causa</strong> que a originou.</p>
+                        </div>
+                    </div>
+
+                    <!-- FEM de Movimento -->
+                    <div class="formula-card md:col-span-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-teal-600 mb-1">FEM de Movimento (Barra a deslizar em trilhos)</p>
+                                <div class="formula-display text-teal-900 text-2xl">|&epsilon;| = B &middot; L &middot; v</div>
+                                <p class="text-sm text-slate-600 mb-3">Calcula a tensão instantânea gerada quando você arrasta uma barra de metal através de um campo magnético constante.</p>
+                                <div class="space-y-1.5">
+                                    <p class="text-xs text-slate-500"><span class="var-tag bg-teal-100 text-teal-700">B</span> Campo magnético (T)</p>
+                                    <p class="text-xs text-slate-500"><span class="var-tag bg-teal-100 text-teal-700">L</span> Comprimento da barra mergulhada no campo (m)</p>
+                                    <p class="text-xs text-slate-500"><span class="var-tag bg-teal-100 text-teal-700">v</span> Velocidade da barra (m/s)</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900 rounded-xl p-5 text-white">
+                                <h4 class="text-sm font-bold text-amber-400 mb-3 uppercase tracking-wider">⚡ Checklist de Prova — Indução</h4>
+                                <ol class="space-y-2 text-sm text-slate-300 list-decimal list-inside">
+                                    <li>Identifique <strong>o que está a mudar</strong> (B, A, ou &theta;?)</li>
+                                    <li>Escreva &Phi;<sub>B</sub> = B&middot;A&middot;cos(&theta;) em função do tempo</li>
+                                    <li>Derive em relação a t: d&Phi;/dt</li>
+                                    <li>Multiplique por &minus;N</li>
+                                    <li>Use Lei de Lenz para definir o sentido da corrente</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 pt-8 pb-12 text-center">
+                <p class="text-sm text-slate-500">Dossiê Tático de Finais &mdash; <strong class="text-slate-400">Sr. Evandson</strong> | Eng. Computação</p>
+                <p class="text-xs text-slate-600 mt-1">Material de estudo pessoal &middot; Física III &middot; Eletromagnetismo</p>
+                <a href="index.html" class="inline-block mt-4 px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-500 transition-colors">&larr; Voltar ao Painel Principal</a>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Sidebar Active State Script -->
+    <script>
+        // Highlight active sidebar link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    sidebarLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.sidebar-link[href="#${entry.target.id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Smooth scroll
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
