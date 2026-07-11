@@ -91,6 +91,50 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+                    <div class="flex justify-center">
+                        <img src="img/forca_condutor.png" alt="Força sobre Condutor" class="diagram-img w-full max-w-sm">
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="img/momento_magnetico.png" alt="Momento Magnético" class="diagram-img w-full max-w-sm">
+                    </div>
+                </div>
+
+                <div class="formula-card border-l-4 border-rose-500">
+                    <div class="f-title text-rose-600">Força sobre Condutor com Corrente</div>
+                    <div class="formula-display text-rose-900">F = L &middot; I &middot; B &middot; sen(&theta;)</div>
+                    <p class="text-sm text-slate-600 mt-2">Força magnética sobre um fio de comprimento L percorrido por corrente I em campo B. Direção: <strong>regra da mão direita</strong> (F &perp; I e B).</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">F</span> Força magnética (N)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">L</span> Comprimento do condutor (m)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">I</span> Corrente elétrica (A)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">B</span> Campo magnético (T)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-rose-100 text-rose-700">&theta;</span> Ângulo entre I e B (se &theta;=90°, F é máxima)</p>
+                    </div>
+                </div>
+
+                <div class="formula-card border-l-4 border-pink-500">
+                    <div class="f-title text-pink-600">Momento Magnético (&mu;)</div>
+                    <div class="formula-display text-pink-900">&mu; = N &middot; I &middot; A</div>
+                    <p class="text-sm text-slate-600 mt-2">Medida da "força" magnética de uma espira. Unidade: A&middot;m&sup2;</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">N</span> Número de espiras</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">I</span> Corrente (A)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-pink-100 text-pink-700">A</span> Área da espira (m&sup2;)</p>
+                    </div>
+                </div>
+
+                <div class="formula-card border-l-4 border-fuchsia-500">
+                    <div class="f-title text-fuchsia-600">Torque sobre Espira (Motor)</div>
+                    <div class="formula-display text-fuchsia-900">&tau; = &mu; &middot; B &middot; sen(&theta;)</div>
+                    <p class="text-sm text-slate-600 mt-2">Torque que o campo B exerce sobre uma espira com momento &mu;. É <strong>máximo</strong> quando &theta; = 90° e <strong>zero</strong> quando &theta; = 0° (equilíbrio).</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-fuchsia-100 text-fuchsia-700">&tau;</span> Torque (N&middot;m)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-fuchsia-100 text-fuchsia-700">&mu;</span> Momento magnético (A&middot;m&sup2;)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-fuchsia-100 text-fuchsia-700">&theta;</span> Ângulo entre &mu; e B</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -102,8 +146,13 @@
                 <p class="text-emerald-100 text-sm mt-2">Campos magnéticos que <strong>variam no tempo</strong> criam voltagem.</p>
             </div>
 
-            <div class="flex justify-center">
-                <img src="img/faraday_inducao.png" alt="Indução eletromagnética" class="diagram-img w-full max-w-md">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex justify-center">
+                    <img src="img/faraday_inducao.png" alt="Indução eletromagnética" class="diagram-img w-full max-w-md">
+                </div>
+                <div class="flex justify-center">
+                    <img src="img/corrente_induzida.png" alt="Corrente Induzida" class="diagram-img w-full max-w-md">
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -140,6 +189,17 @@
                                 <li>Lei de Lenz: sentido da corrente</li>
                             </ol>
                         </div>
+                    </div>
+                </div>
+
+                <div class="formula-card border-l-4 border-emerald-500">
+                    <div class="f-title text-emerald-600">Corrente Induzida</div>
+                    <div class="formula-display text-emerald-900">i<sub>ind</sub> = &epsilon; / R</div>
+                    <p class="text-sm text-slate-600 mt-2">A FEM induzida gera corrente no circuito. O sentido segue a <strong>Lei de Lenz</strong>: opõe-se à causa da variação de fluxo.</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-emerald-100 text-emerald-700">i<sub>ind</sub></span> Corrente induzida (A)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-emerald-100 text-emerald-700">&epsilon;</span> FEM induzida (V) — Faraday</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-emerald-100 text-emerald-700">R</span> Resistência do circuito (&Omega;)</p>
                     </div>
                 </div>
             </div>

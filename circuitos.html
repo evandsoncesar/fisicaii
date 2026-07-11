@@ -80,6 +80,10 @@
                 <h2 class="text-2xl font-black">Ressonância &amp; Ângulo de Fase</h2>
             </div>
 
+            <div class="flex justify-center mb-6">
+                <img src="img/diagrama_fasores.png" alt="Diagrama de Fasores RLC" class="diagram-img w-full max-w-md">
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="formula-card formula-hero" style="background: linear-gradient(135deg, #4c1d95, #7c3aed);">
                     <p class="text-xs font-bold uppercase tracking-wider text-violet-200 mb-1">Frequência de Ressonância ⭐</p>
@@ -105,6 +109,125 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- DIVISOR DE CORRENTE & ASSOCIAÇÕES -->
+        <section class="space-y-6 section-animate">
+            <div class="chapter-header bg-gradient-to-r from-cyan-600 to-sky-600" data-chapter="DC">
+                <p class="text-xs font-bold uppercase tracking-widest text-cyan-200 mb-1">Fundamentos de Circuitos</p>
+                <h2 class="text-2xl font-black">Divisor de Corrente &amp; Associações</h2>
+                <p class="text-cyan-100 text-sm mt-2">Regras para <strong>simplificar</strong> circuitos com resistores, indutores e capacitores.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="flex justify-center">
+                    <img src="img/divisor_corrente.png" alt="Divisor de Corrente" class="diagram-img w-full max-w-sm">
+                </div>
+                <div class="flex justify-center">
+                    <img src="img/associacoes_rlc.png" alt="Associações de RLC" class="diagram-img w-full max-w-sm">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <!-- Divisor de Corrente -->
+                <div class="formula-card md:col-span-2 formula-hero" style="background: linear-gradient(135deg, #0e7490, #0891b2);">
+                    <div class="f-title text-cyan-200">Divisor de Corrente ⭐</div>
+                    <div class="formula-display text-xl">I<sub>k</sub> = I<sub>total</sub> &middot; (R<sub>eq</sub> / R<sub>k</sub>)</div>
+                    <p class="text-sm text-cyan-100 mt-3">Para <strong>2 resistores em paralelo</strong>, a forma mais usada é:</p>
+                    <div class="formula-display text-lg mt-2">I<sub>1</sub> = I<sub>T</sub> &middot; R<sub>2</sub> / (R<sub>1</sub> + R<sub>2</sub>)</div>
+                    <p class="text-xs text-cyan-100 mt-3">A corrente se divide inversamente à resistência: o ramo de <strong>menor R</strong> leva <strong>mais corrente</strong>.</p>
+                    <div class="bg-white/10 border border-white/20 rounded-lg p-3 mt-3">
+                        <p class="text-xs text-cyan-200"><strong>Dica:</strong> Compare com o divisor de tensão (V<sub>k</sub> = V&middot;R<sub>k</sub>/R<sub>total</sub>) — são "inversos"!</p>
+                    </div>
+                </div>
+
+                <!-- Resistores Série -->
+                <div class="formula-card border-l-4 border-orange-500">
+                    <div class="f-title text-orange-600">Resistores em Série</div>
+                    <div class="formula-display text-orange-900">R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + ... + R<sub>n</sub></div>
+                    <p class="text-sm text-slate-600 mt-2">Mesma corrente em todos. Tensão se <strong>divide</strong>.</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-orange-100 text-orange-700">R<sub>eq</sub></span> Sempre &gt; maior resistor individual</p>
+                    </div>
+                </div>
+
+                <!-- Resistores Paralelo -->
+                <div class="formula-card border-l-4 border-orange-500">
+                    <div class="f-title text-orange-600">Resistores em Paralelo</div>
+                    <div class="formula-display text-orange-900">1/R<sub>eq</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + ... + 1/R<sub>n</sub></div>
+                    <p class="text-sm text-slate-600 mt-2">Mesma tensão em todos. Corrente se <strong>divide</strong>.</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-orange-100 text-orange-700">2 resistores</span> R<sub>eq</sub> = (R<sub>1</sub> &middot; R<sub>2</sub>) / (R<sub>1</sub> + R<sub>2</sub>)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-orange-100 text-orange-700">R<sub>eq</sub></span> Sempre &lt; menor resistor individual</p>
+                    </div>
+                </div>
+
+                <!-- Indutores Série -->
+                <div class="formula-card border-l-4 border-violet-500">
+                    <div class="f-title text-violet-600">Indutores em Série</div>
+                    <div class="formula-display text-violet-900">L<sub>eq</sub> = L<sub>1</sub> + L<sub>2</sub> + ... + L<sub>n</sub></div>
+                    <p class="text-sm text-slate-600 mt-2">Comportam-se <strong>igual a resistores</strong>: somam em série.</p>
+                </div>
+
+                <!-- Indutores Paralelo -->
+                <div class="formula-card border-l-4 border-violet-500">
+                    <div class="f-title text-violet-600">Indutores em Paralelo</div>
+                    <div class="formula-display text-violet-900">1/L<sub>eq</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + ... + 1/L<sub>n</sub></div>
+                    <p class="text-sm text-slate-600 mt-2">Também igual a resistores: inverso da soma dos inversos.</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-violet-100 text-violet-700">2 indutores</span> L<sub>eq</sub> = (L<sub>1</sub> &middot; L<sub>2</sub>) / (L<sub>1</sub> + L<sub>2</sub>)</p>
+                    </div>
+                </div>
+
+                <!-- Capacitores Série -->
+                <div class="formula-card border-l-4 border-blue-500">
+                    <div class="f-title text-blue-600">Capacitores em Série</div>
+                    <div class="formula-display text-blue-900">1/C<sub>eq</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + ... + 1/C<sub>n</sub></div>
+                    <p class="text-sm text-slate-600 mt-2">⚠️ <strong>Invertido!</strong> Capacitores em série somam como resistores em paralelo.</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">2 capacitores</span> C<sub>eq</sub> = (C<sub>1</sub> &middot; C<sub>2</sub>) / (C<sub>1</sub> + C<sub>2</sub>)</p>
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">C<sub>eq</sub></span> Sempre &lt; menor capacitor individual</p>
+                    </div>
+                </div>
+
+                <!-- Capacitores Paralelo -->
+                <div class="formula-card border-l-4 border-blue-500">
+                    <div class="f-title text-blue-600">Capacitores em Paralelo</div>
+                    <div class="formula-display text-blue-900">C<sub>eq</sub> = C<sub>1</sub> + C<sub>2</sub> + ... + C<sub>n</sub></div>
+                    <p class="text-sm text-slate-600 mt-2">⚠️ <strong>Invertido!</strong> Capacitores em paralelo somam diretamente (como resistores em série).</p>
+                    <div class="space-y-1 mt-3">
+                        <p class="text-xs text-slate-500"><span class="var-tag bg-blue-100 text-blue-700">C<sub>eq</sub></span> Sempre &gt; maior capacitor individual</p>
+                    </div>
+                </div>
+
+                <!-- Resumo Visual -->
+                <div class="formula-card md:col-span-2">
+                    <div class="bg-slate-900 rounded-xl p-5 text-white">
+                        <h4 class="text-sm font-bold text-amber-400 mb-3 uppercase tracking-wider">📋 Resumo Rápido — Quem soma como?</h4>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="bg-white/5 rounded-lg p-3">
+                                <p class="font-bold text-emerald-400 mb-1">Série = Soma Direta</p>
+                                <p class="text-slate-300">R, L</p>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3">
+                                <p class="font-bold text-emerald-400 mb-1">Paralelo = Soma Direta</p>
+                                <p class="text-slate-300">C</p>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3">
+                                <p class="font-bold text-rose-400 mb-1">Série = Inverso</p>
+                                <p class="text-slate-300">C</p>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3">
+                                <p class="font-bold text-rose-400 mb-1">Paralelo = Inverso</p>
+                                <p class="text-slate-300">R, L</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-3 border-t border-slate-700 pt-2"><strong>Macete:</strong> Capacitor é sempre o "rebelde" — faz tudo ao contrário de R e L.</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
